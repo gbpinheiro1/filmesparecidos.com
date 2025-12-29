@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(0, 0, 0);
+}
+
+#header {
+  border: solid red 1px;
+  display: flex;
+  padding: 20px;
+  align-items: center;
+}
+
+#header img {
+  height: 45px;
+  display: flex;
+  position: absolute;
+}
+
+h1 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 30px;
+  color: white;
+  margin: auto;
+}
