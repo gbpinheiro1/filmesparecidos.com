@@ -45,36 +45,35 @@ main {
 }
 
 #character {
-  width: 1000px;
+  width: 890px;
   height: 100%;
   display: flex;
   position: absolute;
   top: 0;
   margin-top: 80px;
+  margin-right: 150px;
 }
 
 #robot {
   height: 350px;
-  width: 400px;
+  width: 300px;
   display: flex;
   position: absolute;
-  top: 17%;
+  top: 10%;
   left: 0;
 }
 
 #greetings {
-  width: 550px;
-  height: 160px;
+  width: 650px;
   display: flex;
   z-index: 0;
   position: absolute;
-  right: 16%;
+  right: 0;
   top: 0;
 }
 
 #dialogue_box {
-  width: 550px;
-  height: 160px;
+  width: 650px;
   display: flex;
   z-index: 0;
   position: relative;
@@ -89,35 +88,38 @@ main {
 #dialogue {
   color: rgb(0, 0, 0);
   display: flex;
-  max-width: 550px;
+  max-width: 580px;
   text-align: justify;
   z-index: 1;
-  font-size: 21.5px;
+  font-size: 21px;
   position: absolute;
-  padding: 20px 15px 15px 15px;
+  top: 46%;
+  transform: translateY(-50%);
+  right: 25px;
 }
 
 #text_input {
   height: 35px;
-  width: 530px;
+  width: 520px;
   display: flex;
   position: absolute;
-  top: 30%;
+  top: 100%;
   right: 0;
+  margin-top: 20px;
 }
 
 main input {
   height: 35px;
-  width: 530px;
-  padding: 0 38px 0 17px;
+  width: 520px;
+  padding: 0 17px 0 17px;
   line-height: 35px;
   display: flex;
-  border-radius: 20px;
   position: relative;
   background-color: #eae6d9;
   color: #1a1a1a;
-  border: 2px solid #343434;
+  border: 1px solid #343434;
   z-index: 0;
+  border-radius: 7px;
 }
 
 input:not(:placeholder-shown) {
@@ -126,6 +128,8 @@ input:not(:placeholder-shown) {
   color: black;
   text-transform: uppercase;
   font-weight: 600;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
 }
 
 input::placeholder {
@@ -140,26 +144,40 @@ input:focus {
   outline: none;
 }
 
-button img {
-  width: 20px;
-}
-
-button {
-  width: 32px;
-  padding-top: 3px;
-  background-color: #5c5c5c;
-  border-radius: 50%;
-  height: 32px;
-  aspect-ratio: 1;
-  border: 2px solid white;
+ul {
   position: absolute;
-  right: 0;
-  z-index: 1;
-  top: 50%;
-  transform: translateX(50%);
-  transform: translateY(-50%);
+  width: 100%;
+  top: 100%;
+  padding: 0 0.5px;
 }
 
-button:hover {
+li {
+  height: 30px;
+  max-width: 100%;
+  display: flex;
+  gap: 5px;
+  background-color: #eae6d9;
+  padding: 5px 5px 5px 10px;
+  border-bottom: 1px solid black;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 18px;
+  color: black;
+  font-weight: 400;
+  word-spacing: -2px;
+}
+
+.movie_title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.movie_release_date {
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+li:hover {
+  background-color: #cfe0e8;
   cursor: pointer;
 }
