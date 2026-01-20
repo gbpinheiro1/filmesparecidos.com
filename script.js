@@ -48,7 +48,7 @@ function searchFilm() {
 
             listItem.append(movie_title, release_date)
             listItem.addEventListener("click", () => {
-              recommendFilms(data.results[j])
+              window.location.href = `page2.html?movieId=${data.results[j].id}`
             })
             filmList.appendChild(listItem)
           }
@@ -56,14 +56,4 @@ function searchFilm() {
       }
     })
     .catch((error) => console.error(error))
-}
-
-function recommendFilms(data) {
-  fetch(
-    `https://api.themoviedb.org/3/movie/${data.id}/recommendations?page=1&language=en-US&api_key=process.env.API_KEY
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data)
-    })
 }

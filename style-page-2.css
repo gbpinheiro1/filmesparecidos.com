@@ -1,0 +1,131 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+container {
+  min-height: 100vh;
+  width: 100%;
+}
+
+body {
+  background-color: oklch(20.5% 0 0);
+}
+
+header {
+  display: flex;
+  padding: 20px 25px 0px 25px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header img {
+  height: 45px;
+  display: flex;
+  filter: brightness(90%);
+}
+
+main {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4rem;
+}
+
+#character {
+  display: flex;
+  position: relative;
+  width: 39vw;
+  margin-left: 100px;
+}
+
+#dialogue {
+  display: flex;
+  width: 27vw;
+  position: relative;
+  height: 55%;
+  margin-left: -1vw;
+}
+
+#robot_sitting {
+  width: 16vw;
+
+  margin-top: 6%;
+}
+
+#dialogue_box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  right: 0;
+}
+
+#dialogue_text {
+  font-family: "Poetsen One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+#dialogue_text {
+  position: absolute;
+  color: rgb(0, 0, 0);
+  max-width: 27vw;
+  text-align: justify;
+  z-index: 1;
+  font-size: 1.35rem;
+  padding: 0.6em;
+}
+
+#chosen_movie {
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-top: 7rem;
+  transform: translateX(-50%);
+}
+
+#choice {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  text-transform: uppercase;
+
+  color: #ff8c00;
+  font-size: 1.8rem;
+}
+
+#chosen_movie_name {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+
+  color: white;
+  font-size: 1.3rem;
+  max-width: 300px;
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+#chosen_movie_poster {
+  display: flex;
+  height: 300px;
+  max-width: 200px;
+  margin-bottom: 0.5rem;
+
+  outline: 1px solid rgba(255, 255, 255, 0.15);
+  outline-offset: -1px;
+  border-radius: 8px;
+}
+
+.card {
+  width: 200px;
+  height: 100px;
+  background-color: aqua;
+}
