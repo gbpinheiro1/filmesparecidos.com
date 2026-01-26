@@ -28,36 +28,43 @@ header img {
 
 main {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  margin-top: 4rem;
+  margin-bottom: 20px;
+}
+
+#first_section {
+  display: flex;
+  position: relative;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100vw;
 }
 
 #character {
   display: flex;
+  width: 600px;
+  height: fit-content;
   position: relative;
-  width: 39vw;
-  margin-left: 100px;
+  align-self: flex-end;
 }
 
 #dialogue {
-  display: flex;
-  width: 27vw;
-  position: relative;
-  height: 55%;
-  margin-left: -1vw;
+  width: 310px;
+  height: 160px;
+  background-image: url(assets/dialogue_box_2.png);
+  background-image: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  right: 20px;
+  top: -60px;
+  z-index: 1;
 }
 
 #robot_sitting {
-  width: 16vw;
-
-  margin-top: 6%;
-}
-
-#dialogue_box {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  right: 0;
+  height: 290px;
+  display: flex;
 }
 
 #dialogue_text {
@@ -67,28 +74,19 @@ main {
 }
 
 #dialogue_text {
-  position: absolute;
   color: rgb(0, 0, 0);
-  max-width: 27vw;
   text-align: justify;
-  z-index: 1;
-  font-size: 1.35rem;
-  padding: 0.6em;
+  hyphens: auto;
+  font-size: 1.2rem;
+  padding: 0.5rem 1rem 2rem 1rem;
 }
 
 #chosen_movie {
-  width: 500px;
+  height: 65vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 1rem;
-
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-top: 7rem;
-  transform: translateX(-50%);
 }
 
 #choice {
@@ -109,23 +107,138 @@ main {
   color: white;
   font-size: 1.3rem;
   max-width: 300px;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   text-align: center;
+  text-justify: justify;
 }
 
 #chosen_movie_poster {
   display: flex;
   height: 300px;
   max-width: 200px;
-  margin-bottom: 0.5rem;
+
+  outline: 1px solid rgba(255, 255, 255, 0.15);
+  outline-offset: -1px;
+  border-radius: 8px;
+}
+#recommended_films {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+#recommendations_title {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  text-transform: uppercase;
+
+  color: #ff8c00;
+  font-size: 1.8rem;
+
+  margin-top: 120px;
+  margin-bottom: 120px;
+}
+
+.cards {
+  width: 90vw;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card {
+  height: 61vh;
+  display: grid;
+
+  grid-template-rows: 2.6rem 1fr 2.2rem;
+
+  justify-items: center;
+  align-items: center;
+}
+
+.title_wrapper {
+  display: flex;
+  height: 2.6rem;
+  max-width: 300px;
+  align-items: center;
+  justify-content: center;
+}
+
+.card p {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+
+  color: white;
+  font-size: 1.3rem;
+
+  text-align: center;
+
+  /* formatando o título para não quebrar o alinhamento dos elementos */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card p {
+  cursor: default;
+}
+
+.card p:hover {
+  white-space: normal;
+}
+
+.poster_wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cards img {
+  height: 300px;
+  width: 200px;
+
+  object-fit: cover;
+  margin: 0;
 
   outline: 1px solid rgba(255, 255, 255, 0.15);
   outline-offset: -1px;
   border-radius: 8px;
 }
 
-.card {
-  width: 200px;
-  height: 100px;
-  background-color: aqua;
+.card span {
+  display: flex;
+  height: 2.2rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25em;
+}
+
+.card span:hover {
+  cursor: pointer;
+}
+
+.card small {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 0.8em;
+  color: rgba(255, 255, 255, 0.748);
+}
+
+.card button {
+  all: unset;
+  width: 1em;
+  height: 1em;
+  background-image: url(assets/add-ellipse-svgrepo-com.svg);
+  filter: contrast(35%);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }

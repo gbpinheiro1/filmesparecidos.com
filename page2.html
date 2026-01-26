@@ -32,25 +32,21 @@
         <img src="assets/logo_2.png" alt="" />
       </header>
       <main>
-        <div id="character">
-          <img
-            src="assets/robot_after_selection.png"
-            alt="robot after  movie selection"
-            srcset=""
-            id="robot_sitting"
-          />
-          <div id="dialogue">
+        <div id="first_section">
+          <div id="character">
             <img
-              src="assets/dialogue_box_2.png"
-              alt=""
+              src="assets/robot_after_selection.png"
+              alt="robot after  movie selection"
               srcset=""
-              id="dialogue_box"
+              id="robot_sitting"
             />
-            <p id="dialogue_text">
-              Novato... Uma bela escolha, devo admitir! Aqui estão outros filmes
-              que também são <strong>Absolute Cinema</strong> para você
-              assistir.
-            </p>
+            <div id="dialogue">
+              <p id="dialogue_text">
+                Novato... Uma bela escolha, devo admitir! Aqui estão outros
+                filmes que também são <strong>Absolute Cinema</strong> para você
+                assistir.
+              </p>
+            </div>
           </div>
           <div id="chosen_movie">
             <p id="choice">Você escolheu</p>
@@ -59,9 +55,11 @@
           </div>
         </div>
         <div id="recommended_films">
-          <div class="card"></div>
+          <p id="recommendations_title">Minhas Recomendações</p>
+          <div class="cards"></div>
         </div>
       </main>
+      <section id="more_info"></section>
     </div>
     <script src="script-page-2.js"></script>
   </body>
