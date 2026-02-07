@@ -38,7 +38,7 @@ main {
   position: relative;
   justify-content: space-evenly;
   align-items: center;
-  width: 100vw;
+  width: 100%;
 }
 
 #character {
@@ -124,7 +124,7 @@ main {
 #recommended_films {
   display: flex;
   flex-direction: column;
-  width: 100vw;
+  width: 100%;
   height: auto;
   justify-content: center;
   align-items: center;
@@ -144,16 +144,15 @@ main {
 }
 
 .cards {
-  width: 90vw;
+  width: 95%;
   display: flex;
   justify-content: space-between;
 }
 
 .card {
-  height: 61vh;
   display: grid;
-
   grid-template-rows: 2.6rem 1fr 2.2rem;
+  gap: 1rem;
 
   justify-items: center;
   align-items: center;
