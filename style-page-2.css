@@ -4,23 +4,25 @@
   box-sizing: border-box;
 }
 
-container {
-  min-height: 100vh;
-  width: 100%;
+#container {
+  border: 1px solid green;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 body {
   background-color: oklch(20.5% 0 0);
 }
 
-header {
+#page_header {
   display: flex;
   padding: 20px 25px 0px 25px;
   align-items: center;
   justify-content: space-between;
 }
 
-header img {
+#page_header img {
   height: 45px;
   display: flex;
   filter: brightness(90%);
@@ -233,11 +235,88 @@ main {
 
 .card button {
   all: unset;
-  width: 1em;
-  height: 1em;
+  width: 0.85rem;
+  height: 0.85rem;
   background-image: url(assets/add-ellipse-svgrepo-com.svg);
   filter: contrast(35%);
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
+}
+
+.more_info {
+  align-self: center;
+  background-color: rgba(255, 255, 255, 0.6);
+  width: 60%;
+  border-radius: 5px;
+  padding: 1rem;
+  margin-top: 5rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.more_info_header {
+  width: 100%;
+  height: 70px;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.more_info_header img {
+  height: 4.5rem;
+  width: 4.5rem;
+}
+
+.more_info_quote {
+  font-size: 1.05rem;
+  flex: 1;
+  text-align: justify;
+  font-family: "Montserrat";
+  font-weight: 500;
+}
+
+.more_info_title {
+  font-size: 1rem;
+  text-justify: justify;
+  font-family: "Montserrat";
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.more_info_overview {
+  font-size: 0.9rem;
+  text-align: justify;
+  font-family: "Montserrat";
+  font-weight: 500;
+  max-width: 30rem;
+}
+
+.more_info_return {
+  font-size: 0.8rem;
+  text-justify: justify;
+  font-family: "Montserrat";
+  font-weight: 500;
+  text-decoration: underline;
+  margin-top: 1.5rem;
+}
+
+.more_info_return:hover {
+  cursor: pointer;
+}
+
+.more_info_p {
+  font-size: 0.9rem;
+  text-justify: justify;
+  font-family: "Montserrat";
+  font-weight: 500;
+  max-width: 30rem;
 }

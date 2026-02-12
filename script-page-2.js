@@ -175,10 +175,9 @@ async function recommendFilms(film_name) {
     const card_bottom = document.createElement("span")
 
     //card de more info
-    const last_section = document.querySelector("#more_info")
-    var movie_more_info = ""
+
     card_bottom.addEventListener("click", async () => {
-      movie_more_info = await moreInfo(filmsResults[i].id)
+      await moreInfo(filmsResults[i].id)
     })
 
     const bottom_text = document.createElement("small")
@@ -395,9 +394,74 @@ function verifyPoster(posters, posterImage) {
   nextPoster()
 }
 
+//Para usar na função moreInfo()
+let last_section = null
+
 async function moreInfo(movieId) {
   const res =
-    await fetch(`https://api.themoviedb.org/3/movie/${movieId}?language=en-US&api_key=process.env.API_KEY
+    await fetch(`https://api.themoviedb.org/3/movie/${movieId}?language=pt-BR&api_key=process.env.API_KEY
   const data = await res.json()
-  return data
+
+  const container = document.querySelector("#container")
+  //refresh das informações num novo clique
+  if (last_section) {
+    last_section.remove()
+  }
+  last_section = document.createElement("section")
+  last_section.classList.add("more_info")
+
+  var more_info_header = document.createElement("header")
+  more_info_header.classList.add("more_info_header")
+
+  var more_info_robot = document.createElement("img")
+  more_info_robot.src = "assets/robot_profile_picture.png"
+
+  const more_info_quote = document.createElement("p")
+  more_info_quote.classList.add("more_info_quote")
+  more_info_quote.innerHTML =
+    "Beleza, novato! Aqui vão algumas informações sobre o filme para você se situar um pouco."
+
+  more_info_header.appendChild(more_info_robot)
+  more_info_header.appendChild(more_info_quote)
+
+  const more_info_title = document.createElement("p")
+  more_info_title.classList.add("more_info_title")
+  more_info_title.innerHTML = `${data.title} (${data.release_date.slice(0, 4)})`
+
+  const more_info_genres = document.createElement("p")
+  more_info_genres.classList.add("more_info_p")
+  more_info_genres.innerHTML = `Gêneros: ${data.genres.map((k) => k.name).join(", ")}.`
+
+  const more_info_overview = document.createElement("p")
+  more_info_overview.classList.add("more_info_overview")
+  more_info_overview.innerHTML = `Sinopse: ${data.overview}`
+
+  const more_info_runtime = document.createElement("p")
+  more_info_runtime.classList.add("more_info_p")
+  var runtime_quote = ""
+
+  const more_info_return = document.createElement("a")
+  more_info_return.classList.add("more_info_return")
+  more_info_return.innerHTML = "Descobrir mais filmes"
+  more_info_return.addEventListener("click", (changePage) => {
+    window.location.href = "index.html"
+  })
+  if (Number(data.runtime) <= 90) {
+    runtime_quote = "(É curtinho, dá para assistir hoje mesmo!)"
+  }
+
+  if (Number(data.runtime) >= 150) {
+    runtime_quote = "(Esse é longo, hein? Perfeito para uma tarde de domingo!)"
+  }
+  more_info_runtime.innerHTML = `Duração: ${data.runtime} mins. ${runtime_quote}`
+
+  last_section.append(
+    more_info_header,
+    more_info_title,
+    more_info_genres,
+    more_info_runtime,
+    more_info_overview,
+    more_info_return,
+  )
+  container.append(last_section)
 }
