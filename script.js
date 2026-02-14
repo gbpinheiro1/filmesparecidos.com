@@ -17,13 +17,14 @@ function searchFilm() {
     .then((response) => response.json())
     .then((data) => {
       let popularityRank = []
+      let addedMovies = []
       for (let i = 0; i < data.results.length; i++) {
         popularityRank.push(data.results[i].popularity)
       }
       //ordenando o rank de relevância dos filmes
       popularityRank.sort((a, b) => a - b)
       popularityRank.reverse()
-      //inserindo os 8 mais relevantes como recomendação
+      //inserindo os 7 mais relevantes como recomendação
       //usando o rank de relevância para selecionar as recomendações da API que quero aparecendo nas <li>
       for (let i = 0; i < popularityRank.length; i++) {
         for (let j = 0; j < data.results.length; j++) {
@@ -31,8 +32,12 @@ function searchFilm() {
             popularityRank[i] == data.results[j].popularity &&
             data.results[j].release_date.length > 0 &&
             filmList.children.length < 7 &&
-            data.results[j].title.trim().toLowerCase().includes(filmId)
+            data.results[j].title.trim().toLowerCase().includes(filmId) &&
+            !addedMovies.some((id) => id === data.results[j].id)
           ) {
+            //evitar duplicatas na barra de pesquisa
+            addedMovies.push(data.results[j].id)
+
             const listItem = document.createElement("li")
 
             const movie_title = document.createElement("span")
@@ -43,7 +48,7 @@ function searchFilm() {
             release_date.classList.add("movie_release_date")
             release_date.textContent = `(${data.results[j].release_date.slice(
               0,
-              4
+              4,
             )})`
 
             listItem.append(movie_title, release_date)

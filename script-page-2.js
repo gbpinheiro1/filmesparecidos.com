@@ -327,7 +327,6 @@ async function similarMovies(
       validate(data.results[i], chosenMovieName, filmsResults) === true
     ) {
       filmsResults.push(data.results[i])
-      console.log("similar")
     }
 
     if (
@@ -338,7 +337,6 @@ async function similarMovies(
       validate(data.results[i], chosenMovieName, filmsResults) === true
     ) {
       filmsResults.push(data.results[i])
-      console.log("similar")
     }
   }
   return filmsResults
@@ -356,7 +354,6 @@ async function discoverMovies(params, filmsResults, chosenMovieName) {
     }
     if (validate(data.results[i], chosenMovieName, filmsResults) === true)
       filmsResults.push(data.results[i])
-    console.log("discover")
   }
   return filmsResults
 }
@@ -428,6 +425,9 @@ async function moreInfo(movieId) {
   more_info_title.classList.add("more_info_title")
   more_info_title.innerHTML = `${data.title} (${data.release_date.slice(0, 4)})`
 
+  const more_info_details = document.createElement("div")
+  more_info_details.classList.add("more_info_details")
+
   const more_info_genres = document.createElement("p")
   more_info_genres.classList.add("more_info_p")
   more_info_genres.innerHTML = `Gêneros: ${data.genres.map((k) => k.name).join(", ")}.`
@@ -439,6 +439,12 @@ async function moreInfo(movieId) {
   const more_info_runtime = document.createElement("p")
   more_info_runtime.classList.add("more_info_p")
   var runtime_quote = ""
+
+  more_info_details.append(
+    more_info_genres,
+    more_info_overview,
+    more_info_runtime,
+  )
 
   const more_info_return = document.createElement("a")
   more_info_return.classList.add("more_info_return")
@@ -458,10 +464,11 @@ async function moreInfo(movieId) {
   last_section.append(
     more_info_header,
     more_info_title,
-    more_info_genres,
-    more_info_runtime,
-    more_info_overview,
+    more_info_details,
     more_info_return,
   )
   container.append(last_section)
+
+  //Autoscroll para o card criado
+  last_section.scrollIntoView({ behavior: "smooth", block: "end" })
 }
