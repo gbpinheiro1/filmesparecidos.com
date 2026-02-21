@@ -19,7 +19,13 @@ function searchFilm() {
       let popularityRank = []
       let addedMovies = []
       for (let i = 0; i < data.results.length; i++) {
-        popularityRank.push(data.results[i].popularity)
+        if (
+          !popularityRank.some(
+            (popularity) => popularity == data.results[i].popularity,
+          )
+        ) {
+          popularityRank.push(data.results[i].popularity)
+        }
       }
       //ordenando o rank de relevância dos filmes
       popularityRank.sort((a, b) => a - b)

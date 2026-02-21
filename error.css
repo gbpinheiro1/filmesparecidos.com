@@ -1,0 +1,104 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: oklch(20.5% 0 0);
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+header {
+  display: flex;
+  padding: 20px 25px 0px 25px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header img {
+  height: 45px;
+  display: flex;
+  filter: brightness(90%);
+}
+
+main {
+  width: fit-content;
+  margin-top: 6rem;
+  margin-right: 4rem;
+
+  display: flex;
+  align-self: center;
+  justify-content: center;
+}
+
+main img {
+  height: 360px;
+  margin-top: 2.75rem;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+#dialogue {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url(assets/dialogue_box_2.png);
+  background-size: 100% 100%;
+  padding: 0.5rem 1rem 2.5rem 1rem;
+}
+
+main p {
+  font-family: "Poetsen One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: black;
+  font-size: 24px;
+  max-width: 25rem;
+  hyphens: auto;
+}
+
+section span {
+  display: flex;
+  align-self: flex-end;
+  gap: 0.3rem;
+  align-items: center;
+  padding: 0.25rem;
+
+  border: 2px solid rgba(255, 255, 255, 0.884);
+  border-radius: 5px;
+}
+
+section a {
+  text-decoration: none;
+  font-family: "Alan Sans", sans-serif;
+  font-weight: 300;
+  font-size: 1.35rem;
+  color: rgb(255, 255, 255);
+}
+
+section button {
+  all: unset;
+
+  background-image: url(assets/movie-clapper-svgrepo-com.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  width: 1.5rem;
+  height: 1.5rem;
+  filter: brightness(85%);
+  margin-bottom: 0.25rem;
+}
+
+section button:hover {
+  cursor: pointer;
+}

@@ -4,9 +4,37 @@
   box-sizing: border-box;
 }
 
-#container {
-  border: 1px solid green;
+#loading {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#loading img {
+  height: 60px;
+  animation: fade;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+#container {
+  display: none;
   flex-direction: column;
   justify-content: center;
 }
@@ -101,7 +129,7 @@ main {
   font-size: 1.8rem;
 }
 
-#chosen_movie_name {
+#chosen_movie_info {
   font-family: "Montserrat";
   font-style: normal;
   font-weight: 500;
@@ -112,6 +140,19 @@ main {
   margin-top: 1rem;
   text-align: center;
   text-justify: justify;
+}
+
+.chosen_movie_name {
+  /* formatando o título para não quebrar o alinhamento dos elementos */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.chosen_movie_name:hover {
+  cursor: default;
 }
 
 #chosen_movie_poster {
@@ -305,8 +346,7 @@ main {
   font-size: 0.8rem;
   text-justify: justify;
   font-family: "Montserrat";
-  font-weight: 500;
-  text-decoration: underline;
+  font-weight: 800;
   margin-top: 1.5rem;
 }
 

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Filmes parecidos com...</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -27,6 +27,11 @@
   </head>
   <body>
     <link rel="stylesheet" href="style-page-2.css" />
+
+    <div id="loading">
+      <img src="assets/logo.png" alt="Carregando..." srcset="" />
+    </div>
+
     <div id="container">
       <header id="page_header">
         <img src="assets/logo_2.png" alt="" />
@@ -50,7 +55,7 @@
           </div>
           <div id="chosen_movie">
             <p id="choice">Você escolheu</p>
-            <p id="chosen_movie_name"></p>
+            <span id="chosen_movie_info"></span>
             <img src="" alt="" srcset="" id="chosen_movie_poster" />
           </div>
         </div>

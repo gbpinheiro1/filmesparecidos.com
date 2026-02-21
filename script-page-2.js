@@ -1,21 +1,38 @@
 chosenMovie()
-function chosenMovie() {
+async function chosenMovie() {
   const info = new URLSearchParams(window.location.search)
   const filmId = info.get("movieId")
-  var chosen_movie_name = document.querySelector("#chosen_movie_name")
+  var chosen_movie_info = document.querySelector("#chosen_movie_info")
+  var chosen_movie_name = document.createElement("p")
+  chosen_movie_name.classList.add("chosen_movie_name")
+  var chosen_movie_date = document.createElement("p")
   var chosen_movie_poster = document.querySelector("#chosen_movie_poster")
 
-  fetch(
+  const response = await fetch(
     `https://api.themoviedb.org/3/movie/${filmId}?language=pt-BR&api_key=process.env.API_KEY
   )
-    .then((response) => response.json())
-    .then((movie) => {
-      chosen_movie_name.innerHTML = `${movie.title} (${movie.release_date.slice(
-        0,
-        4,
-      )})`
-      recommendFilms(movie.title)
-    })
+  const movie = await response.json()
+  chosen_movie_name.innerHTML = movie.title
+  //ajustar para título completo on hover
+  chosen_movie_name.title = `${movie.title} (${movie.release_date.slice(0, 4)})`
+
+  chosen_movie_date.innerHTML = `(${movie.release_date.slice(0, 4)})`
+  chosen_movie_info.append(chosen_movie_name, chosen_movie_date)
+
+  var filmsResults = await recommendFilms(movie.title)
+
+  if (!filmsResults) {
+    window.location.href = "error.html"
+    return
+  }
+
+  //garantir que a animação aconteça pelo menos uma vez
+  var actualTime = Date.now()
+  const minimumTime = 2000 //tempo de uma repetição da animação
+
+  document.querySelector("#loading").remove()
+  document.querySelector("#container").style.display = "flex"
+  renderCards(filmsResults)
 
   fetch(
     `https://api.themoviedb.org/3/movie/${filmId}/images?api_key=process.env.API_KEY&include_image_language=en-US`,
@@ -163,8 +180,16 @@ async function recommendFilms(film_name) {
     )
   }
 
+  if (filmsResults.length === 0) {
+    return null
+  }
+  return filmsResults
+}
+
+function renderCards(filmsResults) {
+  const cards = document.querySelector(".cards")
   for (let i = 0; i < filmsResults.length; i++) {
-    if (cards.children.length >= 4) break
+    if (cards.children.length >= 4 || filmsResults === null) break
 
     const card = document.createElement("div")
     card.classList.add("card")
@@ -293,7 +318,6 @@ async function recommendedMovies(
       validate(data.results[i], chosenMovieName, filmsResults) === true
     ) {
       filmsResults.push(data.results[i])
-      console.log(`recommended e página ${pageNumber}`)
     }
   }
   return filmsResults
