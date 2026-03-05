@@ -1,7 +1,9 @@
 //Pegando o input de texto HTML e a <ul>
 var filmInput = document.querySelector("#film_name")
 var filmList = document.querySelector("#film_list")
-filmInput.addEventListener("input", searchFilm)
+filmInput.addEventListener("input", () => {
+  searchFilm()
+})
 
 function searchFilm() {
   var filmId = filmInput.value.trim().toLowerCase()
@@ -11,9 +13,7 @@ function searchFilm() {
   }
   filmList.innerHTML = ""
 
-  fetch(
-    `https://api.themoviedb.org/3/search/movie?include_adult=false&language=pt-BR&query=${filmId}&page=1&api_key=process.env.API_KEY
-  )
+  fetch(`http://127.0.0.1:3000/api/search?q=${encodeURIComponent(filmId)}`)
     .then((response) => response.json())
     .then((data) => {
       let popularityRank = []

@@ -2,6 +2,13 @@ chosenMovie()
 async function chosenMovie() {
   const info = new URLSearchParams(window.location.search)
   const filmId = info.get("movieId")
+
+  if (!filmId || filmId === "null") {
+    console.error("ID do filme não encontrado.")
+    window.location.href = "index.html"
+    return
+  }
+
   var chosen_movie_info = document.querySelector("#chosen_movie_info")
   var chosen_movie_name = document.createElement("p")
   chosen_movie_name.classList.add("chosen_movie_name")
@@ -9,10 +16,23 @@ async function chosenMovie() {
   var chosen_movie_poster = document.querySelector("#chosen_movie_poster")
 
   const response = await fetch(
-    `https://api.themoviedb.org/3/movie/${filmId}?language=pt-BR&api_key=process.env.API_KEY
+    `http://localhost:3000/api/movie/${encodeURIComponent(filmId)}`,
   )
+
+  if (!response.ok) {
+    console.error("Erro HTTP:", response.status)
+    return
+  }
+
   const movie = await response.json()
+
+  if (!movie.title) {
+    console.error("Resposta inválida:", movie)
+    return
+  }
+
   chosen_movie_name.innerHTML = movie.title
+
   //ajustar para título completo on hover
   chosen_movie_name.title = `${movie.title} (${movie.release_date.slice(0, 4)})`
 
@@ -34,9 +54,7 @@ async function chosenMovie() {
   document.querySelector("#container").style.display = "flex"
   renderCards(filmsResults)
 
-  fetch(
-    `https://api.themoviedb.org/3/movie/${filmId}/images?api_key=process.env.API_KEY&include_image_language=en-US`,
-  )
+  fetch(`http://localhost:3000/api/movie/${filmId}/images`)
     .then((response) => response.json())
     .then((movie) => {
       if (movie.posters.length > 0) {
@@ -55,9 +73,7 @@ async function recommendFilms(film_name) {
   var movieGenres = []
   var movieYear = null
   const chosenMovieName = film_name
-  await fetch(
-    `https://api.themoviedb.org/3/movie/${filmId}?language=pt-BR&api_key=process.env.API_KEY
-  )
+  await fetch(`http://localhost:3000/api/movie/${filmId}`)
     .then((response) => response.json())
     .then((movie) => {
       movieYear = Number(movie.release_date.slice(0, 4))
@@ -76,74 +92,53 @@ async function recommendFilms(film_name) {
 
   var filmsResults = []
   // fallback da API em camadas
-  var pageNumber = 1
-  filmsResults = await recommendedMovies(
-    filmId,
+
+  var movieKeywords = []
+  await fetch(`http://localhost:3000/api/movie/${filmId}/keywords`)
+    .then((response) => response.json())
+    .then((movie) => {
+      if (movie.keywords.length > 8) {
+        movieKeywords = movie.keywords
+          .slice(0, 8)
+          .map((keywords) => keywords.id)
+      } else {
+        movieKeywords = movie.keywords.map((keywords) => keywords.id)
+      }
+    })
+
+  var filterContol = [50, 1000]
+  var keywordsQuantity = 2
+  var chosenKeywords = []
+  movieKeywords.length > 0
+    ? (chosenKeywords = await strongestKeyword(
+        movieKeywords,
+        filterContol,
+        keywordsQuantity,
+      ))
+    : ""
+  console.log(chosenKeywords)
+
+  var keywordParam = ""
+
+  if (!chosenKeywords || chosenKeywords.length === 0) {
+    chosenKeywords = movieKeywords[0]
+    keywordParam = `&with_keywords=${chosenKeywords}`
+  } else {
+    keywordParam = `&with_keywords=${chosenKeywords.join(",")}`
+  }
+
+  filmsResults = await discoverMovies(
+    `&with_genres=${movieGenres.join(",")}` +
+      keywordParam +
+      `&vote_average.gte=5.5`,
+    filmsResults,
+    chosenMovieName,
     movieYear,
     movieGenres,
-    chosenMovieName,
-    pageNumber,
-    filmsResults,
   )
-  // camada 2
-  if (filmsResults.length < 4) {
-    pageNumber = 2
-    filmsResults = await recommendedMovies(
-      filmId,
-      movieYear,
-      movieGenres,
-      chosenMovieName,
-      pageNumber,
-      filmsResults,
-    )
-  }
-  //camada 3, usar keywords
-  if (filmsResults.length < 4) {
-    var movieKeywords = []
-    await fetch(
-      `https://api.themoviedb.org/3/movie/${filmId}/keywords?api_key=process.env.API_KEY
-    )
-      .then((response) => response.json())
-      .then((movie) => {
-        if (movie.keywords.length > 8) {
-          movieKeywords = movie.keywords
-            .slice(0, 8)
-            .map((keywords) => keywords.id)
-        } else {
-          movieKeywords = movie.keywords.map((keywords) => keywords.id)
-        }
-      })
 
-    var filterContol = [50, 1000]
-    var keywordsQuantity = 2
-    var chosenKeywords = []
-    movieKeywords.length > 0
-      ? (chosenKeywords = await strongestKeyword(
-          movieKeywords,
-          filterContol,
-          keywordsQuantity,
-        ))
-      : ""
-    console.log(chosenKeywords)
+  //camada 2 (usar apenas 1 keyword)
 
-    var keywordParam = ""
-
-    if (!chosenKeywords || chosenKeywords.length === 0) {
-      chosenKeywords = movieKeywords[0]
-      keywordParam = `&with_keywords=${chosenKeywords}`
-    } else {
-      keywordParam = `&with_keywords=${chosenKeywords.join(",")}`
-    }
-
-    filmsResults = await discoverMovies(
-      `&with_genres=${movieGenres.join(",")}` +
-        keywordParam +
-        `&vote_average.gte=5.5`,
-      filmsResults,
-      chosenMovieName,
-    )
-  }
-  // usar apenas 1 keyword
   if (filmsResults.length < 4 && movieKeywords.length > 0) {
     chosenKeywords = []
     keywordParam = ""
@@ -167,8 +162,36 @@ async function recommendFilms(film_name) {
         `&vote_average.gte=5.5`,
       filmsResults,
       chosenMovieName,
+      movieYear,
+      movieGenres,
     )
   }
+
+  //camada 3
+  if (filmsResults.length < 4) {
+    var pageNumber = 1
+    filmsResults = await recommendedMovies(
+      filmId,
+      movieYear,
+      movieGenres,
+      chosenMovieName,
+      pageNumber,
+      filmsResults,
+    )
+  }
+  // camada 4
+  if (filmsResults.length < 4) {
+    pageNumber = 2
+    filmsResults = await recommendedMovies(
+      filmId,
+      movieYear,
+      movieGenres,
+      chosenMovieName,
+      pageNumber,
+      filmsResults,
+    )
+  }
+
   //última camada, caso ainda não tenha completado 4 recomendações
   if (filmsResults.length < 4) {
     filmsResults = await similarMovies(
@@ -185,7 +208,6 @@ async function recommendFilms(film_name) {
   }
   return filmsResults
 }
-
 function renderCards(filmsResults) {
   const cards = document.querySelector(".cards")
   for (let i = 0; i < filmsResults.length; i++) {
@@ -259,7 +281,7 @@ async function strongestKeyword(movieKeywords, filterContol, keywordsQuantity) {
   var quantity = keywordsQuantity
   for (let i = 0; i < movieKeywords.length; i++) {
     const response = await fetch(
-      `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=pt-BR&page=1&api_key=process.env.API_KEY&with_keywords=${movieKeywords[i]}`,
+      `http://localhost:3000/api/discover?page=1&with_keywords=${movieKeywords[i]}`,
     )
     const movie = await response.json()
     console.log(movieKeywords)
@@ -286,7 +308,7 @@ async function recommendedMovies(
   filmsResults,
 ) {
   const res = await fetch(
-    `https://api.themoviedb.org/3/movie/${filmId}/recommendations?page=${pageNumber}&language=pt-BR&api_key=process.env.API_KEY
+    `http://localhost:3000/api/movie/${filmId}/recommendations?page=${pageNumber}`,
   )
   const data = await res.json()
   const currentYear = new Date().getFullYear()
@@ -303,7 +325,7 @@ async function recommendedMovies(
 
     if (
       movieYear <= currentYear - 12 &&
-      commonGenres >= 2 &&
+      commonGenres >= 1 &&
       validate(data.results[i], chosenMovieName, filmsResults) === true
     ) {
       filmsResults.push(data.results[i])
@@ -313,11 +335,12 @@ async function recommendedMovies(
     else if (
       movieYear > currentYear - 12 &&
       Math.abs(movieYear - Number(data.results[i].release_date.slice(0, 4))) >
-        1 &&
+        0 &&
       commonGenres >= 2 &&
       validate(data.results[i], chosenMovieName, filmsResults) === true
     ) {
       filmsResults.push(data.results[i])
+      console.log(`recommended e página ${pageNumber}`)
     }
   }
   return filmsResults
@@ -330,9 +353,7 @@ async function similarMovies(
   chosenMovieName,
   filmsResults,
 ) {
-  const res = await fetch(
-    `https://api.themoviedb.org/3/movie/${filmId}/similar?language=pt-BR&page=1&api_key=process.env.API_KEY
-  )
+  const res = await fetch(`http://localhost:3000/api/movie/${filmId}/similar`)
   const data = await res.json()
   const currentYear = new Date().getFullYear()
 
@@ -357,7 +378,7 @@ async function similarMovies(
       movieYear > currentYear - 12 &&
       Math.abs(movieYear - Number(data.results[i].release_date.slice(0, 4))) >
         0 &&
-      commonGenres >= 2 &&
+      commonGenres >= 1 &&
       validate(data.results[i], chosenMovieName, filmsResults) === true
     ) {
       filmsResults.push(data.results[i])
@@ -366,26 +387,54 @@ async function similarMovies(
   return filmsResults
 }
 
-async function discoverMovies(params, filmsResults, chosenMovieName) {
-  const url = `https://api.themoviedb.org/3/discover/movie?include_adult=false
-&include_video=false
-&vote_count.gte=45&sort_by=vote_count.desc&language=pt-BR&page=1&api_key=process.env.API_KEY
+async function discoverMovies(
+  params,
+  filmsResults,
+  chosenMovieName,
+  movieYear,
+  movieGenres,
+) {
+  const url = `http://localhost:3000/api/discover?vote_count.gte=45&sort_by=vote_count.desc&page=1${params}`
   const res = await fetch(url)
   const data = await res.json()
+
+  const currentYear = new Date().getFullYear()
+  var commonGenres = 0
+
   for (let i = 0; i < data.results.length; i++) {
     if (filmsResults.length >= 4) {
       break
     }
-    if (validate(data.results[i], chosenMovieName, filmsResults) === true)
+
+    commonGenres = movieGenres.filter((genreId) =>
+      data.results[i].genre_ids.includes(genreId),
+    ).length
+
+    if (
+      validate(data.results[i], chosenMovieName, filmsResults) === true &&
+      movieYear <= currentYear - 12 &&
+      commonGenres >= 2
+    ) {
       filmsResults.push(data.results[i])
+      console.log("Discover")
+    }
+    //Evitar que o algoritmo da TMDB recomende filmes por simples semelhança de ano de lançamento (comportamento de filmes recentes)
+    else if (
+      movieYear > currentYear - 12 &&
+      Math.abs(movieYear - Number(data.results[i].release_date.slice(0, 4))) >
+        0 && //evita recomendações genéricas por ano de lançamento em comum
+      commonGenres >= 2 &&
+      validate(data.results[i], chosenMovieName, filmsResults) === true
+    ) {
+      filmsResults.push(data.results[i])
+      console.log("Discover")
+    }
   }
   return filmsResults
 }
 
 async function hasValidPoster(movieId) {
-  const res = await fetch(
-    `https://api.themoviedb.org/3/movie/${movieId}/images?api_key=process.env.API_KEY&include_image_language=en-US`,
-  )
+  const res = await fetch(`http://localhost:3000/api/movie/${movieId}/images`)
   const data = await res.json()
 
   return data.posters && data.posters.length > 0
@@ -419,8 +468,7 @@ function verifyPoster(posters, posterImage) {
 let last_section = null
 
 async function moreInfo(movieId) {
-  const res =
-    await fetch(`https://api.themoviedb.org/3/movie/${movieId}?language=pt-BR&api_key=process.env.API_KEY
+  const res = await fetch(`http://localhost:3000/api/movie/${movieId}`)
   const data = await res.json()
 
   const container = document.querySelector("#container")
