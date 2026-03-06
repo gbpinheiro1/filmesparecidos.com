@@ -1,7 +1,7 @@
 <h1 align="center"> Filmes parecidos com... / filmesparecidos.com </h1>
 
 <p align="center">
-Site que recomenda filmes parecidos e informações sobre eles, a partir do input de um certo filme escolhido pelo usuário.
+Site que recomenda filmes parecidos e dá informações sobre eles, a partir do input de um certo filme escolhido pelo usuário.
 </p>
 
 <p align="center">
