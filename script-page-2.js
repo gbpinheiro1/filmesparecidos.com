@@ -16,7 +16,7 @@ async function chosenMovie() {
   var chosen_movie_poster = document.querySelector("#chosen_movie_poster")
 
   const response = await fetch(
-    `http://localhost:3000/api/movie/${encodeURIComponent(filmId)}`,
+    `https://filmesparecidos-com.onrender.com/api/movie/${encodeURIComponent(filmId)}`,
   )
 
   if (!response.ok) {
@@ -54,7 +54,7 @@ async function chosenMovie() {
   document.querySelector("#container").style.display = "flex"
   renderCards(filmsResults)
 
-  fetch(`http://localhost:3000/api/movie/${filmId}/images`)
+  fetch(`https://filmesparecidos-com.onrender.com/api/movie/${filmId}/images`)
     .then((response) => response.json())
     .then((movie) => {
       if (movie.posters.length > 0) {
@@ -73,7 +73,7 @@ async function recommendFilms(film_name) {
   var movieGenres = []
   var movieYear = null
   const chosenMovieName = film_name
-  await fetch(`http://localhost:3000/api/movie/${filmId}`)
+  await fetch(`https://filmesparecidos-com.onrender.com/api/movie/${filmId}`)
     .then((response) => response.json())
     .then((movie) => {
       movieYear = Number(movie.release_date.slice(0, 4))
@@ -94,7 +94,9 @@ async function recommendFilms(film_name) {
   // fallback da API em camadas
 
   var movieKeywords = []
-  await fetch(`http://localhost:3000/api/movie/${filmId}/keywords`)
+  await fetch(
+    `https://filmesparecidos-com.onrender.com/api/movie/${filmId}/keywords`,
+  )
     .then((response) => response.json())
     .then((movie) => {
       if (movie.keywords.length > 8) {
@@ -281,7 +283,7 @@ async function strongestKeyword(movieKeywords, filterContol, keywordsQuantity) {
   var quantity = keywordsQuantity
   for (let i = 0; i < movieKeywords.length; i++) {
     const response = await fetch(
-      `http://localhost:3000/api/discover?page=1&with_keywords=${movieKeywords[i]}`,
+      `https://filmesparecidos-com.onrender.com/api/discover?page=1&with_keywords=${movieKeywords[i]}`,
     )
     const movie = await response.json()
     console.log(movieKeywords)
@@ -308,7 +310,7 @@ async function recommendedMovies(
   filmsResults,
 ) {
   const res = await fetch(
-    `http://localhost:3000/api/movie/${filmId}/recommendations?page=${pageNumber}`,
+    `https://filmesparecidos-com.onrender.com/api/movie/${filmId}/recommendations?page=${pageNumber}`,
   )
   const data = await res.json()
   const currentYear = new Date().getFullYear()
@@ -353,7 +355,9 @@ async function similarMovies(
   chosenMovieName,
   filmsResults,
 ) {
-  const res = await fetch(`http://localhost:3000/api/movie/${filmId}/similar`)
+  const res = await fetch(
+    `https://filmesparecidos-com.onrender.com/api/movie/${filmId}/similar`,
+  )
   const data = await res.json()
   const currentYear = new Date().getFullYear()
 
@@ -394,7 +398,7 @@ async function discoverMovies(
   movieYear,
   movieGenres,
 ) {
-  const url = `http://localhost:3000/api/discover?vote_count.gte=45&sort_by=vote_count.desc&page=1${params}`
+  const url = `https://filmesparecidos-com.onrender.com/api/discover?vote_count.gte=45&sort_by=vote_count.desc&page=1${params}`
   const res = await fetch(url)
   const data = await res.json()
 
@@ -434,7 +438,9 @@ async function discoverMovies(
 }
 
 async function hasValidPoster(movieId) {
-  const res = await fetch(`http://localhost:3000/api/movie/${movieId}/images`)
+  const res = await fetch(
+    `https://filmesparecidos-com.onrender.com/api/movie/${movieId}/images`,
+  )
   const data = await res.json()
 
   return data.posters && data.posters.length > 0
@@ -468,7 +474,9 @@ function verifyPoster(posters, posterImage) {
 let last_section = null
 
 async function moreInfo(movieId) {
-  const res = await fetch(`http://localhost:3000/api/movie/${movieId}`)
+  const res = await fetch(
+    `https://filmesparecidos-com.onrender.com/api/movie/${movieId}`,
+  )
   const data = await res.json()
 
   const container = document.querySelector("#container")

@@ -13,7 +13,9 @@ function searchFilm() {
   }
   filmList.innerHTML = ""
 
-  fetch(`http://127.0.0.1:3000/api/search?q=${encodeURIComponent(filmId)}`)
+  fetch(
+    `https://filmesparecidos-com.onrender.com/api/search?q=${encodeURIComponent(filmId)}`,
+  )
     .then((response) => response.json())
     .then((data) => {
       let popularityRank = []
