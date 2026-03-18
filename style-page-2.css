@@ -37,6 +37,7 @@
   display: none;
   flex-direction: column;
   justify-content: center;
+  margin-bottom: 3rem;
 }
 
 body {
@@ -369,4 +370,45 @@ main {
   justify-content: center;
   align-items: flex-start;
   gap: 1.5rem;
+}
+
+footer {
+  display: flex;
+  width: 100vw;
+
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+footer p {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.8em;
+  color: white;
+}
+
+#logos {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+#logo_git {
+  height: 20px;
+  width: 20px;
+  background-image: url(assets/github-logo.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+#logo_linkedin {
+  height: 45px;
+  width: 50px;
+  background-image: url(assets/linkedin-logo.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }

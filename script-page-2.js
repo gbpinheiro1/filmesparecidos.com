@@ -46,10 +46,6 @@ async function chosenMovie() {
     return
   }
 
-  //garantir que a animação aconteça pelo menos uma vez
-  var actualTime = Date.now()
-  const minimumTime = 2000 //tempo de uma repetição da animação
-
   document.querySelector("#loading").remove()
   document.querySelector("#container").style.display = "flex"
   renderCards(filmsResults)

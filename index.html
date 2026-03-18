@@ -34,24 +34,29 @@
       </div>
 
       <main>
-        <div id="character">
-          <img
-            src="assets/robot_before_selection.png"
-            alt="robot character"
-            id="robot"
-          />
-          <div id="greetings">
-            <p id="dialogue">
-              Olá! Meu nome é Randy e sou um robô cinéfilo! Me conte um filme
-              que você gosta e vou te recomendar outros parecidos com ele para
-              você assistir!
-            </p>
-
+        <section id="center_elements">
+          <div id="character">
             <img
-              src="assets/dialogue_box.png"
-              alt="character's dialogue box"
-              id="dialogue_box"
+              src="assets/robot_before_selection.png"
+              alt="robot character"
+              id="robot"
             />
+          </div>
+          <div id="center_right">
+            <div id="dialogue">
+              <p id="dialogue_text">
+                Olá! Meu nome é Randy e sou um robô cinéfilo! Me conte um filme
+                que você gosta e vou te recomendar outros parecidos com ele para
+                você assistir!
+              </p>
+
+              <img
+                src="assets/dialogue_box.png"
+                alt="character's dialogue box"
+                id="dialogue_box"
+              />
+            </div>
+
             <div id="text_input">
               <input
                 type="text"
@@ -63,8 +68,38 @@
               <ul id="film_list" style="list-style-type: none"></ul>
             </div>
           </div>
-        </div>
+        </section>
+
+        <section id="hover_wrapper">
+          <img
+            src="assets/question-mark.svg"
+            alt="question mark symbol"
+            srcset=""
+          />
+          <div id="warning">
+            <p id="warning_text">
+              A sua busca já vai aparecer! Devido ao uso da tecnologia Render
+              para o funcionamento do site, a primeira pesquisa pode levar cerca
+              de 30 segundos para acontecer.
+            </p>
+          </div>
+        </section>
       </main>
+      <footer>
+        <p>Desenvolvido por Gabriel Pinheiro</p>
+        <div id="logos">
+          <a
+            href="https://github.com/gbpinheiro1"
+            id="logo_git"
+            target="_blank"
+          ></a>
+          <a
+            href="https://www.linkedin.com/in/gabriel-pinheiro-da-silva/"
+            id="logo_linkedin"
+            target="_blank"
+          ></a>
+        </div>
+      </footer>
     </div>
     <script src="script.js"></script>
   </body>

@@ -4,9 +4,12 @@
   box-sizing: border-box;
 }
 
-container {
-  min-height: 100vh;
-  width: 100%;
+#container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  width: 100vw;
 }
 
 body {
@@ -17,95 +20,94 @@ body {
   display: flex;
   padding: 20px 25px 0px 25px;
   align-items: center;
-  justify-content: space-between;
 }
 
 #header img {
   height: 45px;
-  display: flex;
-  filter: brightness(90%);
-}
-
-h1 {
-  font-family: "Montserrat", sans-serif;
-  font-weight: 500;
-  font-style: normal;
-  font-size: 30px;
-  color: white;
-  display: flex;
   filter: brightness(90%);
 }
 
 main {
-  padding-top: 80px;
+  width: 100vw;
+  flex: 1;
+  padding-left: 3rem;
+
   display: flex;
-  min-height: 100vh;
-  position: relative;
   justify-content: center;
+  align-items: center;
+  position: relative;
+  gap: 0.4rem;
+}
+
+#center_elements {
+  display: flex;
 }
 
 #character {
-  width: 890px;
-  height: 100%;
   display: flex;
-  position: absolute;
-  top: 0;
-  margin-top: 80px;
-  margin-right: 150px;
+  position: relative;
+  height: 350px;
+  width: 300px;
 }
 
 #robot {
   height: 350px;
   width: 300px;
-  display: flex;
   position: absolute;
-  top: 10%;
-  left: 0;
+  left: 3.5rem;
+  top: 4rem;
 }
 
-#greetings {
-  width: 650px;
+#center_right {
+  width: 600px;
+  height: 350px;
   display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+#dialogue {
+  display: flex;
+  position: relative;
+  width: 600px;
+  min-height: 125px;
+}
+
+#dialogue_box {
+  height: 125px;
+  width: 600px;
   z-index: 0;
   position: absolute;
   right: 0;
   top: 0;
 }
 
-#dialogue_box {
-  width: 650px;
-  display: flex;
-  z-index: 0;
-  position: relative;
-}
-
-#dialogue {
+#dialogue_text {
   font-family: "Poetsen One", sans-serif;
   font-weight: 400;
   font-style: normal;
 }
 
-#dialogue {
+#dialogue_text {
   color: rgb(0, 0, 0);
   display: flex;
   max-width: 580px;
   text-align: justify;
   z-index: 1;
   font-size: 21px;
-  position: absolute;
-  top: 46%;
-  transform: translateY(-50%);
-  right: 25px;
+  position: relative;
+  padding-top: 1.25rem;
+  padding-left: 2.5rem;
 }
 
 #text_input {
   height: 35px;
   width: 520px;
   display: flex;
+
   position: absolute;
-  top: 100%;
+  top: 45%;
   right: 0;
-  margin-top: 20px;
 }
 
 main input {
@@ -120,6 +122,54 @@ main input {
   border: 1px solid #343434;
   z-index: 0;
   border-radius: 7px;
+}
+
+#hover_wrapper {
+  display: flex;
+  position: relative;
+  justify-content: flex-end;
+  width: 275px;
+  height: 350px;
+}
+
+#hover_wrapper img {
+  width: 1.8rem;
+  height: 1.8rem;
+  position: absolute;
+  left: 0;
+  top: 45.7%;
+}
+
+#hover_wrapper img:hover + #warning {
+  display: flex;
+}
+
+#warning {
+  display: none;
+  justify-content: flex-start;
+  width: 240px;
+  height: 160px;
+  align-self: flex-end;
+  position: relative;
+
+  background-image: url(assets/dialogue_box_4.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: top;
+}
+
+#warning_text {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.8em;
+  text-align: justify;
+  padding: 0.9em;
+
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 2em 0.5em 1em 0.5em;
 }
 
 input:not(:placeholder-shown) {
@@ -146,14 +196,16 @@ input:focus {
 
 ul {
   position: absolute;
-  width: 100%;
+  width: 525px;
   top: 100%;
-  padding: 0 0.5px;
+  left: 0;
+  padding-left: 0.05rem;
+  padding-right: 0.35rem;
 }
 
 li {
   height: 30px;
-  max-width: 100%;
+  max-width: 525px;
   display: flex;
   gap: 5px;
   background-color: #eae6d9;
@@ -180,4 +232,46 @@ li {
 li:hover {
   background-color: #cfe0e8;
   cursor: pointer;
+}
+
+footer {
+  display: flex;
+  width: 100vw;
+
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.75rem;
+  padding-right: 0.5rem;
+}
+
+footer p {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.8em;
+  color: white;
+}
+
+#logos {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+#logo_git {
+  height: 20px;
+  width: 20px;
+  background-image: url(assets/github-logo.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+#logo_linkedin {
+  height: 45px;
+  width: 50px;
+  background-image: url(assets/linkedin-logo.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
