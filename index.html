@@ -34,39 +34,31 @@
       </div>
 
       <main>
+        <section id="character">
+          <img
+            src="assets/robot_before_selection.png"
+            alt="robot character"
+            id="robot"
+          />
+        </section>
         <section id="center_elements">
-          <div id="character">
-            <img
-              src="assets/robot_before_selection.png"
-              alt="robot character"
-              id="robot"
-            />
+          <div id="dialogue">
+            <p id="dialogue_text">
+              Olá! Meu nome é Randy e sou um robô cinéfilo! Me conte um filme
+              que você gosta e vou te recomendar outros parecidos com ele para
+              você assistir!
+            </p>
           </div>
-          <div id="center_right">
-            <div id="dialogue">
-              <p id="dialogue_text">
-                Olá! Meu nome é Randy e sou um robô cinéfilo! Me conte um filme
-                que você gosta e vou te recomendar outros parecidos com ele para
-                você assistir!
-              </p>
 
-              <img
-                src="assets/dialogue_box.png"
-                alt="character's dialogue box"
-                id="dialogue_box"
-              />
-            </div>
-
-            <div id="text_input">
-              <input
-                type="text"
-                name="film_name"
-                id="film_name"
-                placeholder="Digite o nome do filme..."
-                autocomplete="off"
-              />
-              <ul id="film_list" style="list-style-type: none"></ul>
-            </div>
+          <div id="text_input">
+            <input
+              type="text"
+              name="film_name"
+              id="film_name"
+              placeholder="Digite o nome do filme..."
+              autocomplete="off"
+            />
+            <ul id="film_list" style="list-style-type: none"></ul>
           </div>
         </section>
 

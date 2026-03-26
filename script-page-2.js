@@ -545,6 +545,8 @@ async function moreInfo(movieId) {
   )
   container.append(last_section)
 
-  //Autoscroll para o card criado
-  last_section.scrollIntoView({ behavior: "smooth", block: "end" })
+  var footer = document.querySelector("#page_footer")
+
+  //Autoscroll para o card criado on click
+  footer.scrollIntoView({ behavior: "smooth", block: "end" })
 }
