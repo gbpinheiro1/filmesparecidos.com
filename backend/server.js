@@ -19,6 +19,11 @@ app.use(
   }),
 )
 
+//Teste para o servidor do Railway
+app.get("/", (req, res) => {
+  res.json({ status: "ok" })
+})
+
 app.get("/api/search", async (req, res) => {
   const filmId = req.query.q
   const api_key = process.env.API_KEY
@@ -144,10 +149,12 @@ app.get("/api/discover", (req, res) => {
 
 const port = process.env.PORT || 3000
 
+//Teste para o Railway
 process.on("uncaughtException", (err) => {
   console.error("UNCAUGHT EXCEPTION:", err)
 })
 
+//Teste para o Railway
 process.on("unhandledRejection", (reason) => {
   console.error("UNHANDLED REJECTION:", reason)
 })
