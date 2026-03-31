@@ -163,4 +163,6 @@ process.on("unhandledRejection", (reason) => {
 
 app.listen(port, "0.0.0.0", () => {
   console.log(`>>>> SERVIDOR ATIVO NA PORTA ${port} <<<<`)
+  console.log("process.env.PORT =", process.env.PORT)
+  console.log("PORT variável =", port)
 })
