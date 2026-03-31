@@ -163,6 +163,9 @@ app.get("/api/discover", (req, res) => {
 
 const port = process.env.PORT || 3000
 
-app.listen(port, "0.0.0.0", () => {
+const server = app.listen(port, "0.0.0.0", () => {
   console.log(`>>>> SERVIDOR ATIVO NA PORTA ${port} <<<<`)
 })
+
+// Mantém o processo do Node.js artificialmente ocupado para o Railway não achar que ele terminou e encerrar o contêiner.
+setInterval(() => {}, 1000 * 60 * 60) // Executa a cada 1 hora
