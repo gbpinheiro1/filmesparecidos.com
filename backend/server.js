@@ -36,66 +36,65 @@ app.get("/", (req, res) => {
   res.json({ status: "ok" })
 })
 
-app.get("/api/search", async (req, res) => {
+app.get("/api/search", (req, res) => {
   const filmId = req.query.q
-  const api_key = process.env.API_KEY
 
   if (!filmId) {
     return res.status(400).json({ error: "Query vazia" })
   }
 
-  if (!api_key) {
-    return res.status(500).json({ error: "API_KEY não carregada no servidor" })
-  }
-
-  try {
-    const response = await fetch(
-      `https://api.themoviedb.org/3/search/movie?include_adult=false&language=pt-BR&query=${encodeURIComponent(filmId)}&page=1&api_key=${api_key}`,
-    )
-
-    if (!response.ok) {
-      return res
-        .status(response.status)
-        .json({ error: "Erro na resposta da TMDB" })
-    }
-
-    const data = await response.json()
-    res.json(data)
-  } catch (err) {
-    res.status(500).json({ error: "Erro interno no servidor" })
-  }
+  // Usando a sua função tmdbFetch que já trata os erros bonitinho!
+  tmdbFetch(
+    "/search/movie",
+    {
+      include_adult: "false",
+      language: "pt-BR",
+      query: filmId,
+      page: "1",
+    },
+    res,
+  )
 })
 
-// Função para evitar repetir código em todas as rotas
+// Função para evitar repetir códigos em todas as rotas
 async function tmdbFetch(endpoint, params = {}, res) {
   const api_key = process.env.API_KEY
+
   if (!api_key) {
+    console.error("ERRO CRÍTICO: API_KEY não foi encontrada no process.env!")
     return res.status(500).json({ error: "API_KEY ausente no servidor" })
   }
 
-  // Criar os parâmetros de busca e inserir a api_key
   const searchParams = new URLSearchParams(params)
   searchParams.append("api_key", api_key)
 
-  // url final
   const url = `https://api.themoviedb.org/3${endpoint}?${searchParams.toString()}`
 
+  // Loga no Railway a URL que estamos tentando acessar (escondendo a chave por segurança)
+  console.log(`Buscando na TMDB: https://api.themoviedb.org/3${endpoint}`)
+
   try {
-    const response = await fetch(url)
+    const response = await fetch(url, {
+      headers: {
+        Accept: "application/json",
+      },
+    })
+
     const data = await response.json()
 
     if (!response.ok) {
-      console.error("Erro TMDB:", data)
+      console.error("Erro retornado pela TMDB:", data)
       return res.status(response.status).json(data)
     }
 
     res.json(data)
   } catch (err) {
-    console.error("Erro interno:", err.message)
-    res.status(500).json({ error: "Erro interno no servidor" })
+    console.error("Erro interno ao buscar na TMDB:", err.message)
+    res
+      .status(500)
+      .json({ error: "Erro interno no servidor", detalhes: err.message })
   }
 }
-
 // Rota 1: Pegar detalhes do filme
 app.get("/api/movie/:id", (req, res) => {
   const id = req.params.id // <-- DEFININDO O ID AQUI
