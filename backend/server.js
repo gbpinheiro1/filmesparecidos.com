@@ -10,16 +10,26 @@ const app = express()
 
 app.use(
   cors({
-    origin: [
-      "http://127.0.0.1:5500",
-      "http://localhost:5500",
-      "https://gbpinheiro1.github.io",
-    ],
-
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type"],
+    origin: function (origin, callback) {
+      const allowedOrigins = [
+        "http://127.0.0.1:5500",
+        "http://localhost:5500",
+        "https://gbpinheiro1.github.io",
+      ]
+      // Permite requisições sem origem (como aplicativos mobile ou ferramentas como Postman)
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true)
+      } else {
+        callback(new Error("Não permitido pelo CORS"))
+      }
+    },
+    methods: ["GET", "POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
   }),
 )
+
+app.use(express.json())
 
 //Teste para o servidor do Railway
 app.get("/", (req, res) => {
@@ -151,21 +161,6 @@ app.get("/api/discover", (req, res) => {
 
 const port = process.env.PORT || 3000
 
-//Teste para o Railway
-process.on("uncaughtException", (err) => {
-  console.error("UNCAUGHT EXCEPTION:", err)
-})
-
-//Teste para o Railway
-process.on("unhandledRejection", (reason) => {
-  console.error("UNHANDLED REJECTION:", reason)
-})
-
-const server = app.listen(port, "0.0.0.0", () => {
+app.listen(port, () => {
   console.log(`>>>> SERVIDOR ATIVO NA PORTA ${port} <<<<`)
-  console.log("process.env.PORT =", process.env.PORT)
-})
-
-server.on("error", (err) => {
-  console.error("ERRO AO INICIAR SERVIDOR:", err)
 })
