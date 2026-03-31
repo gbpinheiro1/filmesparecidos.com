@@ -144,6 +144,14 @@ app.get("/api/discover", (req, res) => {
 
 const port = process.env.PORT || 3000
 
+process.on("uncaughtException", (err) => {
+  console.error("UNCAUGHT EXCEPTION:", err)
+})
+
+process.on("unhandledRejection", (reason) => {
+  console.error("UNHANDLED REJECTION:", reason)
+})
+
 app.listen(port, "0.0.0.0", () => {
   console.log(`>>>> SERVIDOR ATIVO NA PORTA ${port} <<<<`)
 })
