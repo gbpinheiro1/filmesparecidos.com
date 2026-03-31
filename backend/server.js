@@ -161,8 +161,11 @@ process.on("unhandledRejection", (reason) => {
   console.error("UNHANDLED REJECTION:", reason)
 })
 
-app.listen(port, "0.0.0.0", () => {
+const server = app.listen(port, "0.0.0.0", () => {
   console.log(`>>>> SERVIDOR ATIVO NA PORTA ${port} <<<<`)
   console.log("process.env.PORT =", process.env.PORT)
-  console.log("PORT variável =", port)
+})
+
+server.on("error", (err) => {
+  console.error("ERRO AO INICIAR SERVIDOR:", err)
 })
