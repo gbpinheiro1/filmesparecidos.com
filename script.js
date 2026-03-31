@@ -14,7 +14,7 @@ function searchFilm() {
   filmList.innerHTML = ""
 
   fetch(
-    `https://filmesparecidos-com.onrender.com/api/search?q=${encodeURIComponent(filmId)}`,
+    `https://filmesparecidoscom-production.up.railway.app/api/search?q=${encodeURIComponent(filmId)}`,
   )
     .then((response) => response.json())
     .then((data) => {

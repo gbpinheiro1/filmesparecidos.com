@@ -142,6 +142,8 @@ app.get("/api/discover", (req, res) => {
   )
 })
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log("Servidor rodando!")
+const port = process.env.PORT || 3000
+
+app.listen(port, "0.0.0.0", () => {
+  console.log(`>>>> SERVIDOR ATIVO NA PORTA ${port} <<<<`)
 })

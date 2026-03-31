@@ -16,7 +16,7 @@ async function chosenMovie() {
   var chosen_movie_poster = document.querySelector("#chosen_movie_poster")
 
   const response = await fetch(
-    `https://filmesparecidos-com.onrender.com/api/movie/${encodeURIComponent(filmId)}`,
+    `https://filmesparecidoscom-production.up.railway.app/api/movie/${encodeURIComponent(filmId)}`,
   )
 
   if (!response.ok) {
@@ -50,7 +50,9 @@ async function chosenMovie() {
   document.querySelector("#container").style.display = "flex"
   renderCards(filmsResults)
 
-  fetch(`https://filmesparecidos-com.onrender.com/api/movie/${filmId}/images`)
+  fetch(
+    `https://filmesparecidoscom-production.up.railway.app/api/movie/${filmId}/images`,
+  )
     .then((response) => response.json())
     .then((movie) => {
       if (movie.posters.length > 0) {
@@ -69,7 +71,9 @@ async function recommendFilms(film_name) {
   var movieGenres = []
   var movieYear = null
   const chosenMovieName = film_name
-  await fetch(`https://filmesparecidos-com.onrender.com/api/movie/${filmId}`)
+  await fetch(
+    `https://filmesparecidoscom-production.up.railway.app/api/movie/${filmId}`,
+  )
     .then((response) => response.json())
     .then((movie) => {
       movieYear = Number(movie.release_date.slice(0, 4))
@@ -91,7 +95,7 @@ async function recommendFilms(film_name) {
 
   var movieKeywords = []
   await fetch(
-    `https://filmesparecidos-com.onrender.com/api/movie/${filmId}/keywords`,
+    `https://filmesparecidoscom-production.up.railway.app/api/movie/${filmId}/keywords`,
   )
     .then((response) => response.json())
     .then((movie) => {
@@ -279,7 +283,7 @@ async function strongestKeyword(movieKeywords, filterContol, keywordsQuantity) {
   var quantity = keywordsQuantity
   for (let i = 0; i < movieKeywords.length; i++) {
     const response = await fetch(
-      `https://filmesparecidos-com.onrender.com/api/discover?page=1&with_keywords=${movieKeywords[i]}`,
+      `https://filmesparecidoscom-production.up.railway.app/api/discover?page=1&with_keywords=${movieKeywords[i]}`,
     )
     const movie = await response.json()
     console.log(movieKeywords)
@@ -306,7 +310,7 @@ async function recommendedMovies(
   filmsResults,
 ) {
   const res = await fetch(
-    `https://filmesparecidos-com.onrender.com/api/movie/${filmId}/recommendations?page=${pageNumber}`,
+    `https://filmesparecidoscom-production.up.railway.app/api/movie/${filmId}/recommendations?page=${pageNumber}`,
   )
   const data = await res.json()
   const currentYear = new Date().getFullYear()
@@ -352,7 +356,7 @@ async function similarMovies(
   filmsResults,
 ) {
   const res = await fetch(
-    `https://filmesparecidos-com.onrender.com/api/movie/${filmId}/similar`,
+    `https://filmesparecidoscom-production.up.railway.app/api/movie/${filmId}/similar`,
   )
   const data = await res.json()
   const currentYear = new Date().getFullYear()
@@ -394,7 +398,7 @@ async function discoverMovies(
   movieYear,
   movieGenres,
 ) {
-  const url = `https://filmesparecidos-com.onrender.com/api/discover?vote_count.gte=45&sort_by=vote_count.desc&page=1${params}`
+  const url = `https://filmesparecidoscom-production.up.railway.app/api/discover?vote_count.gte=45&sort_by=vote_count.desc&page=1${params}`
   const res = await fetch(url)
   const data = await res.json()
 
@@ -435,7 +439,7 @@ async function discoverMovies(
 
 async function hasValidPoster(movieId) {
   const res = await fetch(
-    `https://filmesparecidos-com.onrender.com/api/movie/${movieId}/images`,
+    `https://filmesparecidoscom-production.up.railway.app/api/movie/${movieId}/images`,
   )
   const data = await res.json()
 
@@ -471,7 +475,7 @@ let last_section = null
 
 async function moreInfo(movieId) {
   const res = await fetch(
-    `https://filmesparecidos-com.onrender.com/api/movie/${movieId}`,
+    `https://filmesparecidoscom-production.up.railway.app/api/movie/${movieId}`,
   )
   const data = await res.json()
 
