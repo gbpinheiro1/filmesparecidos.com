@@ -241,7 +241,7 @@ function renderCards(filmsResults) {
       i
     ].release_date.slice(0, 4)})`
 
-    bottom_text.innerHTML = "Pedir mais informações ao Randy"
+    bottom_text.innerHTML = "Pedir mais informações ao Arias"
 
     card_bottom.append(bottom_text, button)
     title_wrapper.append(title)
