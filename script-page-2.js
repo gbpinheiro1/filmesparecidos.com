@@ -1,3 +1,8 @@
+var eyeLogo = document.querySelector("#eye_logo")
+eyeLogo.addEventListener("click", () => {
+  window.location.href = "index.html"
+})
+
 chosenMovie()
 async function chosenMovie() {
   const info = new URLSearchParams(window.location.search)
@@ -217,7 +222,13 @@ function renderCards(filmsResults) {
 
     const card = document.createElement("div")
     card.classList.add("card")
+
+    const year = document.createElement("p")
+    year.classList.add("card_year")
+
     const title = document.createElement("p")
+    title.classList.add("card_title")
+
     const title_wrapper = document.createElement("div")
     title_wrapper.classList.add("title_wrapper")
 
@@ -232,9 +243,8 @@ function renderCards(filmsResults) {
     const bottom_text = document.createElement("small")
     const button = document.createElement("button")
 
-    title.innerHTML = `${filmsResults[i].title} (${filmsResults[
-      i
-    ].release_date.slice(0, 4)})`
+    title.innerHTML = filmsResults[i].title
+    year.innerHTML = `(${filmsResults[i].release_date.slice(0, 4)})`
 
     // ajustar para título completo on hover
     title.title = `${filmsResults[i].title} (${filmsResults[
@@ -244,7 +254,7 @@ function renderCards(filmsResults) {
     bottom_text.innerHTML = "Pedir mais informações ao Arias"
 
     card_bottom.append(bottom_text, button)
-    title_wrapper.append(title)
+    title_wrapper.append(title, year)
     card.appendChild(title_wrapper)
 
     const poster = document.createElement("img")
@@ -269,8 +279,12 @@ function validate(filmData, chosenMovieName, filmsResults) {
   if (filmData.title.toLowerCase().includes(chosenMovieName.toLowerCase())) {
     return false
   }
-  //Evitar recomendar filmes sem poster
+  //Evitar recomendar filmes sem poster e sem sinopse
   if (!filmData.poster_path) {
+    return false
+  }
+
+  if (!filmData.overview || filmData.overview.length <= 0) {
     return false
   } else {
     return true
@@ -533,11 +547,12 @@ async function moreInfo(movieId) {
     window.location.href = "index.html"
   })
   if (Number(data.runtime) <= 90) {
-    runtime_quote = "(É curtinho, dá para assistir hoje mesmo!)"
+    runtime_quote = "(Novato! Esse é curtinho... Dá para assistir hoje mesmo!)"
   }
 
   if (Number(data.runtime) >= 150) {
-    runtime_quote = "(Esse é longo, hein? Perfeito para uma tarde de domingo!)"
+    runtime_quote =
+      "(Novato, esse é longo, hein? Perfeito para uma tarde de domingo!)"
   }
   more_info_runtime.innerHTML = `Duração: ${data.runtime} mins. ${runtime_quote}`
 
@@ -549,8 +564,6 @@ async function moreInfo(movieId) {
   )
   container.append(last_section)
 
-  var footer = document.querySelector("#page_footer")
-
   //Autoscroll para o card criado on click
-  footer.scrollIntoView({ behavior: "smooth", block: "end" })
+  last_section.scrollIntoView({ behavior: "smooth", block: "start" })
 }

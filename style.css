@@ -27,8 +27,13 @@ header img {
   filter: brightness(90%);
 }
 
+#eye_logo:hover {
+  cursor: pointer;
+}
+
 main {
   width: 80%;
+  margin-top: 1.5rem;
   margin-left: auto;
   margin-right: auto;
   min-height: 70%;
@@ -347,7 +352,7 @@ footer p {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding-right: 0.5rem;
+    padding-right: 0rem;
 
     height: 100%;
   }
@@ -462,6 +467,10 @@ footer p {
     font-size: clamp(0.7rem, 0.7rem + 1vw, 0.95rem);
     word-spacing: -3px;
     gap: 2px;
+  }
+
+  footer {
+    justify-content: center;
   }
 
   footer p {

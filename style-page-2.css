@@ -36,66 +36,74 @@
 #container {
   display: none;
   flex-direction: column;
-  justify-content: center;
-  margin-bottom: 3rem;
+  justify-content: flex-start;
+  margin-bottom: 6rem;
+  min-height: 100vh;
+  width: 100%;
 }
 
 body {
   background-color: oklch(20.5% 0 0);
 }
 
-#page_header {
+header {
   display: flex;
   padding: 20px 25px 0px 25px;
   align-items: center;
   justify-content: space-between;
 }
 
-#page_header img {
-  height: 45px;
+header img {
+  height: 3rem;
   display: flex;
   filter: brightness(90%);
+}
+
+#eye_logo:hover {
+  cursor: pointer;
 }
 
 main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin-top: 1rem;
+  gap: 2rem;
+  width: 100%;
 }
 
 #first_section {
   display: flex;
-  position: relative;
   justify-content: space-evenly;
   align-items: center;
   width: 100%;
+  height: auto;
 }
 
 #character {
   display: flex;
-  width: 600px;
-  height: fit-content;
-  position: relative;
-  align-self: flex-end;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 40%;
+  margin-bottom: 2.25rem;
 }
 
 #dialogue {
-  width: 310px;
-  height: 160px;
+  width: 50%;
+  /* Aspect ratio da imagem de fundo */
+  aspect-ratio: 400 / 177;
   background-image: url(assets/dialogue_box_2.png);
-  background-image: center;
   background-repeat: no-repeat;
-  background-size: cover;
-  position: absolute;
-  right: 20px;
-  top: -60px;
-  z-index: 1;
+  background-size: contain;
+  margin-bottom: 2rem;
 }
 
 #robot_sitting {
-  height: 290px;
-  display: flex;
+  width: 40%;
+  max-width: 350px;
+  height: auto;
+  margin-top: 7.5rem;
 }
 
 #dialogue_text {
@@ -108,15 +116,17 @@ main {
   color: rgb(0, 0, 0);
   text-align: justify;
   hyphens: auto;
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 1.2vw, 3rem);
   padding: 0.5rem 1rem 2rem 1rem;
 }
 
 #chosen_movie {
-  height: 65vh;
+  height: 100%;
+  width: 25%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 1rem;
   align-items: center;
 }
 
@@ -127,7 +137,7 @@ main {
   text-transform: uppercase;
 
   color: #ff8c00;
-  font-size: 1.8rem;
+  font-size: clamp(1.5rem, 2vw, 2.5rem);
 }
 
 #chosen_movie_info {
@@ -136,8 +146,8 @@ main {
   font-weight: 500;
 
   color: white;
-  font-size: 1.3rem;
-  max-width: 300px;
+  font-size: clamp(1rem, 1.5vw, 1.5rem);
+  max-width: 50%;
   margin-top: 1rem;
   text-align: center;
   text-justify: justify;
@@ -157,9 +167,8 @@ main {
 }
 
 #chosen_movie_poster {
-  display: flex;
   height: 300px;
-  max-width: 200px;
+  width: auto;
 
   outline: 1px solid rgba(255, 255, 255, 0.15);
   outline-offset: -1px;
@@ -169,8 +178,8 @@ main {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: auto;
-  justify-content: center;
+  gap: 7.5rem;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -181,33 +190,29 @@ main {
   text-transform: uppercase;
 
   color: #ff8c00;
-  font-size: 1.8rem;
-
-  margin-top: 120px;
-  margin-bottom: 120px;
+  font-size: clamp(1.5rem, 2vw, 2.5rem);
 }
 
 .cards {
-  width: 95%;
+  width: 90%;
   display: flex;
   justify-content: space-between;
 }
 
 .card {
   display: grid;
-  grid-template-rows: 2.6rem 1fr 2.2rem;
-  gap: 1rem;
-
-  justify-items: center;
-  align-items: center;
+  grid-template-columns: 300px;
+  grid-template-rows: 5.5rem 1fr 2.2rem;
+  gap: 1.5rem;
+  height: 100%;
 }
 
 .title_wrapper {
   display: flex;
-  height: 2.6rem;
-  max-width: 300px;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
+  text-align: center;
+  gap: 0.05rem;
 }
 
 .card p {
@@ -216,10 +221,10 @@ main {
   font-weight: 500;
 
   color: white;
-  font-size: 1.3rem;
+  font-size: clamp(1rem, 1.5vw, 1.5rem);
+}
 
-  text-align: center;
-
+.card_title {
   /* formatando o título para não quebrar o alinhamento dos elementos */
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -303,13 +308,11 @@ main {
 
 .more_info_header {
   width: 100%;
-  height: 70px;
-
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.75rem;
   padding-left: 0.5rem;
 }
 
@@ -320,10 +323,9 @@ main {
 
 .more_info_quote {
   font-size: 1.05rem;
-  flex: 1;
   text-align: justify;
   font-family: "Montserrat";
-  font-weight: 500;
+  font-weight: 450;
 }
 
 .more_info_title {
@@ -338,9 +340,10 @@ main {
 .more_info_overview {
   font-size: 0.9rem;
   text-align: justify;
+  hyphens: auto;
   font-family: "Montserrat";
   font-weight: 500;
-  max-width: 30rem;
+  max-width: 100%;
 }
 
 .more_info_return {
@@ -360,25 +363,26 @@ main {
   text-justify: justify;
   font-family: "Montserrat";
   font-weight: 500;
-  max-width: 30rem;
+  max-width: 100%;
 }
 
 .more_info_details {
-  width: 50%;
+  width: 75%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
+  justify-content: flex-start;
+
   gap: 1.5rem;
 }
 
 footer {
   display: flex;
-  width: 100vw;
+  width: 100%;
 
   justify-content: center;
   align-items: center;
   gap: 0.6rem;
+  margin-bottom: 0.75rem;
 }
 
 footer p {
@@ -410,7 +414,842 @@ footer p {
   background-image: url(assets/linkedin-logo.svg);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
 }
 
 /* Responsividade */
+
+/* Celulares pequenos/médios */
+
+@media (min-width: 320px) and (max-width: 374.9px) {
+  #first_section {
+    flex-direction: column;
+  }
+
+  #loading img {
+    height: 45px;
+  }
+
+  header {
+    justify-content: center;
+  }
+
+  header img {
+    height: 2.25rem;
+  }
+
+  #container {
+    margin-bottom: 0rem;
+  }
+
+  main {
+    gap: 4rem;
+    margin-top: 4.5rem;
+  }
+
+  #character {
+    width: 100%;
+    margin-bottom: 4rem;
+  }
+
+  #dialogue {
+    width: 55%;
+    max-width: 275px;
+    align-self: flex-start;
+  }
+
+  #dialogue_text {
+    font-size: clamp(0.675rem, 2.5vw, 1.05rem);
+    padding: 0.3rem 0.5rem 0.5rem 0.5rem;
+  }
+
+  #robot_sitting {
+    width: 40%;
+    max-width: 225px;
+    margin-top: 1rem;
+  }
+
+  #chosen_movie {
+    width: 70%;
+    gap: 0.5rem;
+  }
+
+  #choice {
+    font-size: clamp(1.3rem, 2vw, 2.5rem);
+  }
+
+  #chosen_movie_info {
+    margin-top: 1rem;
+    font-size: clamp(1.1rem, 1.5vw, 1.75rem);
+    max-width: clamp(128px, 75%, 275px);
+  }
+
+  #chosen_movie_poster {
+    margin-top: 0.5rem;
+    height: 250px;
+  }
+
+  #recommended_films {
+    gap: 0rem;
+  }
+
+  #recommendations_title {
+    font-size: clamp(1.3rem, 2vw, 2.5rem);
+  }
+
+  .cards {
+    width: 90%;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1.25rem;
+    gap: 15%;
+  }
+
+  .card {
+    grid-template-columns: 250px;
+    grid-template-rows: 4rem 1fr 1.35rem;
+    gap: 0.75rem;
+    margin-bottom: 3rem;
+  }
+
+  .card p {
+    font-size: clamp(1.1rem, 1.5vw, 1.75rem);
+  }
+
+  .cards img {
+    /* Diminuindo o tamanho, mas mantendo o aspect ratio */
+    height: 250px;
+    width: 167px;
+  }
+
+  .card small {
+    font-size: 0.7rem;
+    margin-bottom: 0.125rem;
+  }
+
+  .card button {
+    width: 0.7rem;
+    height: 0.7rem;
+  }
+
+  .card span {
+    height: 1.2rem;
+    gap: 0.175rem;
+  }
+
+  .more_info {
+    width: 95%;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 0.5rem;
+  }
+
+  .more_info_header {
+    width: 100%;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+    padding-left: 0rem;
+    padding-right: 0rem;
+  }
+
+  .more_info_details {
+    width: 95%;
+    gap: 1rem;
+  }
+
+  .more_info_header img {
+    height: 3rem;
+    width: 3rem;
+  }
+
+  .more_info_quote {
+    font-size: clamp(0.8rem, 1vw, 1rem);
+    max-width: 77%;
+    font-weight: 500;
+    text-align: justify;
+  }
+
+  .more_info_title {
+    font-size: 1.1rem;
+    margin-bottom: 0rem;
+    text-align: center;
+  }
+
+  .more_info_p {
+    font-size: 1rem;
+  }
+
+  .more_info_overview {
+    font-size: 1rem;
+    line-height: 1.35;
+  }
+
+  .more_info_return {
+    font-size: 0.75rem;
+  }
+
+  footer {
+    margin-bottom: 0.3rem;
+    gap: 0.3rem;
+  }
+
+  footer p {
+    font-size: 0.75rem;
+  }
+
+  #logos {
+    gap: 0.3rem;
+  }
+
+  #logo_git {
+    height: 25px;
+    width: 25px;
+  }
+
+  #logo_linkedin {
+    height: 45px;
+    width: 50px;
+  }
+}
+
+/* Celulares médios/grandes e Tablets */
+@media (min-width: 375px) and (max-width: 767.9px) {
+  #first_section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #loading img {
+    height: 45px;
+  }
+
+  header {
+    justify-content: center;
+  }
+
+  header img {
+    height: 2.25rem;
+  }
+
+  #container {
+    margin-bottom: 0rem;
+  }
+
+  main {
+    gap: 4rem;
+    margin-top: 4.5rem;
+  }
+
+  #character {
+    width: 100%;
+    margin-bottom: 4rem;
+  }
+
+  #dialogue {
+    width: 50%;
+    max-width: 275px;
+    align-self: flex-start;
+  }
+
+  #dialogue_text {
+    font-size: clamp(0.725rem, 2.5vw, 1.05rem);
+    padding: 0.3rem 0.5rem 0.5rem 0.5rem;
+  }
+
+  #robot_sitting {
+    width: 45%;
+    max-width: 225px;
+    margin-top: 1rem;
+  }
+
+  #chosen_movie {
+    width: 70%;
+    gap: 0.6rem;
+  }
+
+  #choice {
+    font-size: clamp(1.3rem, 6vw, 2rem);
+  }
+
+  #chosen_movie_info {
+    margin-top: 2.5rem;
+    font-size: clamp(1.1rem, 1.5vw, 1.75rem);
+    max-width: clamp(128px, 75%, 275px);
+  }
+
+  #chosen_movie_poster {
+    margin-top: 0.5rem;
+    height: 300px;
+  }
+
+  #recommended_films {
+    gap: 0rem;
+  }
+
+  .cards {
+    width: 90%;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 2.5rem;
+    gap: 15%;
+  }
+
+  .card {
+    grid-template-columns: 250px;
+    grid-template-rows: 4rem 1fr 1.35rem;
+    gap: 0.75rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .card p {
+    font-size: clamp(1.1rem, 1.5vw, 1.75rem);
+  }
+
+  .cards img {
+    /* Diminuindo o tamanho, mas mantendo o aspect ratio */
+    height: 300px;
+    width: 200px;
+  }
+
+  .card small {
+    font-size: 0.7rem;
+    margin-bottom: 0.125rem;
+  }
+
+  .card button {
+    width: 0.7rem;
+    height: 0.7rem;
+  }
+
+  .card span {
+    height: 1.2rem;
+    gap: 0.175rem;
+  }
+
+  .more_info {
+    width: 90%;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .more_info_header {
+    width: 100%;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+    padding-left: 0rem;
+    padding-right: 0rem;
+  }
+
+  .more_info_details {
+    width: 95%;
+  }
+
+  .more_info_header img {
+    height: 2.75rem;
+    width: 2.75rem;
+  }
+
+  .more_info_quote {
+    font-size: clamp(0.875rem, 1vw, 1rem);
+    max-width: 100%;
+    font-weight: 500;
+    text-align: justify;
+  }
+
+  .more_info_title {
+    font-size: 1.1rem;
+    margin-bottom: 0rem;
+  }
+
+  .more_info_p {
+    font-size: 1.1rem;
+  }
+
+  .more_info_overview {
+    font-size: 1.1rem;
+    line-height: 1.2;
+  }
+
+  .more_info_return {
+    font-size: 0.75rem;
+  }
+
+  footer {
+    margin-bottom: 0.3rem;
+    gap: 0.3rem;
+  }
+
+  footer p {
+    font-size: 0.8rem;
+  }
+
+  #logos {
+    gap: 0.3rem;
+  }
+
+  #logo_git {
+    height: 25px;
+    width: 25px;
+  }
+
+  #logo_linkedin {
+    height: 45px;
+    width: 50px;
+  }
+}
+
+/* Laptops */
+@media (min-width: 768px) and (max-width: 1023.9px) {
+  #loading img {
+    height: 45px;
+  }
+
+  header img {
+    height: 2.25rem;
+  }
+
+  #container {
+    margin-bottom: 2rem;
+  }
+
+  main {
+    gap: 6rem;
+  }
+
+  #character {
+    width: 50%;
+    margin-bottom: 1.75rem;
+  }
+
+  #chosen_movie {
+    gap: 0.6rem;
+  }
+
+  #choice {
+    font-size: clamp(1.3rem, 2vw, 2.5rem);
+  }
+
+  #chosen_movie_info {
+    margin-top: 0.5rem;
+    font-size: clamp(0.9rem, 1.3vw, 1.5rem);
+    max-width: 75%;
+  }
+
+  #chosen_movie_poster {
+    height: 180px;
+  }
+
+  #recommended_films {
+    gap: 3.5rem;
+  }
+
+  #dialogue {
+    margin-bottom: 1rem;
+  }
+
+  #dialogue_text {
+    font-size: clamp(0.725rem, 1.5vw, 3rem);
+    padding: 0.3rem 0.5rem 0.5rem 0.5rem;
+  }
+
+  .cards {
+    width: 95%;
+    justify-content: space-between;
+  }
+
+  .card {
+    grid-template-columns: 160px;
+    grid-template-rows: 3rem 1fr 1.35rem;
+    gap: 0.75rem;
+  }
+
+  .card p {
+    font-size: clamp(0.8rem, 1.2vw, 1.35rem);
+  }
+
+  .cards img {
+    /* Diminuindo o tamanho, mas mantendo o aspect ratio */
+    height: 200px;
+    width: 133px;
+  }
+
+  .card small {
+    font-size: 0.55rem;
+    margin-bottom: 0.1rem;
+  }
+
+  .card button {
+    width: 0.65rem;
+    height: 0.65rem;
+  }
+
+  .card span {
+    height: 1.2rem;
+    gap: 0.175rem;
+  }
+
+  .more_info {
+    width: 70%;
+    margin-top: 5rem;
+  }
+
+  .more_info_header {
+    width: 80%;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+    padding-left: 0.5rem;
+  }
+
+  .more_info_details {
+    width: 70%;
+  }
+
+  .more_info_header img {
+    height: 2.75rem;
+    width: 2.75rem;
+  }
+
+  .more_info_quote {
+    font-size: 0.8rem;
+    max-width: 80%;
+    font-weight: 400;
+    text-align: justify;
+  }
+
+  .more_info_title {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .more_info_p {
+    font-size: 0.9rem;
+  }
+
+  .more_info_overview {
+    font-size: 0.9rem;
+  }
+
+  .more_info_return {
+    font-size: 0.75rem;
+  }
+
+  footer {
+    margin-bottom: 0.75rem;
+    gap: 0.3rem;
+  }
+
+  footer p {
+    font-size: 0.8rem;
+  }
+
+  #logos {
+    gap: 0.3rem;
+  }
+
+  #logo_git {
+    height: 20px;
+    width: 20px;
+  }
+
+  #logo_linkedin {
+    height: 40px;
+    width: 45px;
+  }
+}
+
+/* Laptops */
+@media (min-width: 1024px) and (max-width: 1439.9px) {
+  #loading img {
+    height: 50px;
+  }
+
+  header img {
+    height: 2.5rem;
+  }
+
+  #container {
+    margin-bottom: 3rem;
+  }
+
+  main {
+    gap: 5rem;
+  }
+
+  #chosen_movie {
+    gap: 0.6rem;
+  }
+
+  #chosen_movie_info {
+    font-size: clamp(0.9rem, 1.3vw, 1.5rem);
+    max-width: 75%;
+  }
+
+  #chosen_movie_poster {
+    height: 200px;
+  }
+
+  #recommended_films {
+    gap: 3.5rem;
+  }
+
+  #dialogue {
+    margin-bottom: 1rem;
+  }
+
+  #dialogue_text {
+    font-size: clamp(0.75rem, 1.15vw, 3rem);
+    padding: 0.3rem 0.5rem 0.5rem 0.5rem;
+  }
+
+  .card {
+    grid-template-columns: 190px;
+    grid-template-rows: 3.85rem 1fr 1.75rem;
+    gap: 0.75rem;
+  }
+
+  .card p {
+    font-size: clamp(0.85rem, 1.2vw, 1.35rem);
+  }
+
+  .cards img {
+    /* Diminuindo o tamanho, mas mantendo o aspect ratio */
+    height: 200px;
+    width: 133px;
+  }
+
+  .card small {
+    font-size: 0.6rem;
+    margin-bottom: 0.15rem;
+  }
+
+  .card button {
+    width: 0.65rem;
+    height: 0.65rem;
+  }
+
+  .card span {
+    height: 1.5rem;
+    gap: 0.175rem;
+  }
+
+  .more_info {
+    width: 60%;
+    margin-top: 5rem;
+    border: 1px solid orange;
+  }
+
+  .more_info_header img {
+    height: 3rem;
+    width: 3rem;
+  }
+
+  .more_info_quote {
+    font-size: 0.9rem;
+    max-width: 75%;
+    text-align: justify;
+  }
+
+  .more_info_title {
+    font-size: 1.15rem;
+  }
+
+  .more_info_p {
+    font-size: 1rem;
+  }
+
+  .more_info_overview {
+    font-size: 1rem;
+  }
+
+  .more_info_return {
+    font-size: 0.7rem;
+  }
+
+  footer {
+    margin-bottom: 0.35rem;
+    gap: 0.3rem;
+  }
+
+  footer p {
+    font-size: 0.7rem;
+  }
+
+  #logos {
+    gap: 0.3rem;
+  }
+
+  #logo_git {
+    height: 18px;
+    width: 18px;
+  }
+
+  #logo_linkedin {
+    height: 35px;
+    width: 40px;
+  }
+}
+
+/* Laptops grandes e Telas médias */
+@media (min-width: 1440px) and (max-width: 1919.9px) {
+  main {
+    gap: 5rem;
+  }
+
+  #chosen_movie_info {
+    font-size: clamp(1rem, 1.3vw, 1.5rem);
+    max-width: 75%;
+  }
+
+  #chosen_movie_poster {
+    height: 225px;
+  }
+
+  #recommended_films {
+    gap: 4rem;
+  }
+
+  #dialogue_text {
+    font-size: clamp(1rem, 1.15vw, 3rem);
+  }
+
+  .card {
+    grid-template-columns: 250px;
+    grid-template-rows: 5.1rem 1fr 1.75rem;
+    gap: 1.25rem;
+  }
+
+  .card p {
+    font-size: clamp(1rem, 1.2vw, 1.5rem);
+  }
+
+  .cards img {
+    /* Diminuindo o tamanho, mas mantendo o aspect ratio */
+    height: 250px;
+    width: 167px;
+  }
+
+  .card small {
+    font-size: 0.75rem;
+    margin-bottom: 0.19rem;
+  }
+
+  .card button {
+    width: 0.85rem;
+    height: 0.85rem;
+  }
+
+  .more_info {
+    width: 65%;
+    margin-top: 10rem;
+  }
+
+  .more_info_header img {
+    height: 3.75rem;
+    width: 3.75rem;
+  }
+
+  .more_info_quote {
+    font-size: 1rem;
+    max-width: 50%;
+    text-align: justify;
+  }
+
+  .more_info_title {
+    font-size: 1.45rem;
+  }
+
+  .more_info_p {
+    font-size: 1.2rem;
+  }
+
+  .more_info_overview {
+    font-size: 1.2rem;
+  }
+
+  .more_info_return {
+    font-size: 0.9rem;
+  }
+
+  footer p {
+    font-size: 0.9rem;
+  }
+
+  #logos {
+    gap: 0.6rem;
+  }
+
+  #logo_git {
+    height: 25px;
+    width: 25px;
+  }
+
+  #logo_linkedin {
+    height: 50px;
+    width: 55px;
+  }
+}
+
+/* Telas maiores */
+@media (min-width: 1920px) {
+  #robot_sitting {
+    margin-top: 10rem;
+  }
+
+  .card small {
+    font-size: 1rem;
+    margin-bottom: 0.05rem;
+  }
+
+  .card button {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  .more_info {
+    width: 75%;
+    margin-top: 15rem;
+  }
+
+  .more_info_header img {
+    height: 5rem;
+    width: 5rem;
+  }
+
+  .more_info_quote {
+    font-size: 1.5rem;
+  }
+
+  .more_info_title {
+    font-size: 1.75rem;
+  }
+
+  .more_info_p {
+    font-size: 1.5rem;
+  }
+
+  .more_info_overview {
+    font-size: 1.5rem;
+  }
+
+  .more_info_return {
+    font-size: 1.25rem;
+  }
+
+  footer p {
+    font-size: 1.25rem;
+  }
+
+  #logos {
+    gap: 0.6rem;
+  }
+
+  #logo_git {
+    height: 35px;
+    width: 35px;
+  }
+
+  #logo_linkedin {
+    height: 65px;
+    width: 70px;
+  }
+}

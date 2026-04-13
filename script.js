@@ -1,8 +1,20 @@
+var eyeLogo = document.querySelector("#eye_logo")
+eyeLogo.addEventListener("click", () => {
+  window.location.href = "index.html"
+})
+
 //Pegando o input de texto HTML e a <ul>
 var filmInput = document.querySelector("#film_name")
 var filmList = document.querySelector("#film_list")
+
+//Debounce para a barra de pesquisa
+let debounceTimer
+
 filmInput.addEventListener("input", () => {
-  searchFilm()
+  clearTimeout(debounceTimer)
+  debounceTimer = setTimeout(() => {
+    searchFilm()
+  }, 500)
 })
 
 function searchFilm() {
