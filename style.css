@@ -543,6 +543,10 @@ footer p {
     gap: 2px;
   }
 
+  footer {
+    justify-content: center;
+  }
+
   footer p {
     font-size: 0.7rem;
   }
