@@ -118,6 +118,7 @@ main input {
   height: 100%;
   width: 100%;
   padding: 0 17px 0 17px;
+  font-size: 1rem;
   line-height: 35px;
   display: flex;
   position: relative;
@@ -195,10 +196,9 @@ footer {
   width: 100%;
   height: 10%;
 
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  padding-right: 0.25rem;
 }
 
 footer p {
@@ -325,11 +325,11 @@ footer p {
   }
 
   input::placeholder {
-    font-size: clamp(0.8rem, 0.5rem + 1vw, 0.9rem);
+    font-size: clamp(1rem, 0.5rem + 1vw, 1.2rem);
   }
 
   input:not(:placeholder-shown) {
-    font-size: clamp(0.95rem, 0.7rem + 1vw, 1.05rem);
+    font-size: clamp(1rem, 0.7rem + 1vw, 1.05rem);
   }
 
   li {
@@ -352,8 +352,7 @@ footer p {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding-right: 0rem;
-
+    padding: 0rem;
     height: 100%;
   }
 
