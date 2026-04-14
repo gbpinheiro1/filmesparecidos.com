@@ -330,6 +330,7 @@ main {
 
 .more_info_title {
   font-size: 1rem;
+  text-align: center;
   text-justify: justify;
   font-family: "Montserrat";
   font-weight: 700;
@@ -572,7 +573,6 @@ footer p {
   .more_info_title {
     font-size: 1.1rem;
     margin-bottom: 0rem;
-    text-align: center;
   }
 
   .more_info_p {
@@ -1091,6 +1091,11 @@ footer p {
 
 /* Laptops grandes e Telas médias */
 @media (min-width: 1440px) and (max-width: 1919.9px) {
+  header img {
+    height: 2.5rem;
+    aspect-ratio: 1;
+  }
+
   main {
     gap: 5rem;
   }

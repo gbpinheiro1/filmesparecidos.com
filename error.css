@@ -14,7 +14,6 @@ body {
   justify-content: flex-start;
   gap: 10%;
   height: 100dvh;
-  border: 1px solid orange;
 }
 
 header {
@@ -57,7 +56,6 @@ section {
   background-repeat: no-repeat;
   background-image: url(assets/dialogue_box_2.png);
   background-size: cover;
-  border: 1px solid orange;
   padding: 0.3rem 0.5rem 2rem 0.6rem;
 }
 
@@ -70,7 +68,6 @@ main p {
   max-width: 100%;
   text-justify: justify;
   hyphens: auto;
-  border: 1px solid aqua;
 }
 
 section span {

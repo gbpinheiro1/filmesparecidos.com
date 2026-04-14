@@ -113,7 +113,7 @@ async function recommendFilms(film_name) {
       }
     })
 
-  var filterContol = [50, 1000]
+  var filterContol = [150, 250]
   var keywordsQuantity = 2
   var chosenKeywords = []
   movieKeywords.length > 0
@@ -149,8 +149,8 @@ async function recommendFilms(film_name) {
   if (filmsResults.length < 4 && movieKeywords.length > 0) {
     chosenKeywords = []
     keywordParam = ""
-    keywordsQuantity = 1
-    filterContol = [50, 200]
+    keywordsQuantity = 2
+    filterContol = [251, 500]
     chosenKeywords = await strongestKeyword(
       movieKeywords,
       filterContol,
@@ -284,7 +284,11 @@ function validate(filmData, chosenMovieName, filmsResults) {
     return false
   }
 
-  if (!filmData.overview || filmData.overview.length <= 0) {
+  if (
+    !filmData.overview ||
+    filmData.overview.trim().length === 0 ||
+    filmData.overview === "null"
+  ) {
     return false
   } else {
     return true
@@ -309,7 +313,7 @@ async function strongestKeyword(movieKeywords, filterContol, keywordsQuantity) {
     }
   }
 
-  bestKeywords = bestKeywords.sort((a, b) => a.total - b.total)
+  bestKeywords = bestKeywords.sort((a, b) => b.total - a.total)
   bestKeywords = bestKeywords.slice(0, quantity).map((k) => k.id)
 
   return bestKeywords
@@ -396,7 +400,7 @@ async function similarMovies(
       movieYear > currentYear - 12 &&
       Math.abs(movieYear - Number(data.results[i].release_date.slice(0, 4))) >
         0 &&
-      commonGenres >= 1 &&
+      commonGenres >= 2 &&
       validate(data.results[i], chosenMovieName, filmsResults) === true
     ) {
       filmsResults.push(data.results[i])
