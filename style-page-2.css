@@ -55,7 +55,7 @@ header {
 
 header img {
   height: 3rem;
-  display: flex;
+  width: auto;
   filter: brightness(90%);
 }
 
@@ -1093,7 +1093,6 @@ footer p {
 @media (min-width: 1440px) and (max-width: 1919.9px) {
   header img {
     height: 2.5rem;
-    aspect-ratio: 1;
   }
 
   main {
