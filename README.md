@@ -30,4 +30,4 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 ## 💻 Projeto
 
-Projeto que usa da API do TMDB para criar um recomendador de filmes semelhantes a um filme de input do usuário. Além de recomendar os filmes, o site dá informações como duração, gêneros e sinopse.
+Projeto que usa da API do TMDB para criar um recomendador de filmes semelhantes a um filme de input do usuário. Além de recomendar os filmes, o site dá informações como duração em minutos, gêneros e sinopse.
